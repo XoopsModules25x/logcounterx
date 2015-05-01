@@ -1,0 +1,197 @@
+<h4><{$smarty.const._LCX_TOTAL}>  &lt;<{$xoops_url}>&gt;</h4>
+<{$smarty.const._LCX_VALID}> : <{$log_count}>   (<{$strtday}> -&gt; <{$lastday}>)<br />
+
+<{* Shortened Referer *}>
+<{if $ref_short.Title != ''}>
+<table width="100%" summary="<{$ref_short.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$ref_short.Title}></th></tr>
+<{foreach item=rec from=$ref_short.Data}>
+<tr>
+<{if $rec.Link != ''}>
+<td class="head" nowrap="nowrap"><a href="<{$rec.Link}>" title="<{$rec.Name}>" target="_blank"><{$rec.Name}></a></td>
+<{else}>
+<td class="head" nowrap="nowrap"><{$rec.Name}></td>
+<{/if}>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />&nbsp;<{$rec.FormattedCount}></td>
+</tr>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{* Query Words *}>
+<{if $qword.Title != ''}>
+<table width="100%" summary="<{$qword.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$qword.Title}></th></tr>
+<{foreach item=rec from=$qword.Data}>
+<tr>
+<td class="head" nowrap="nowrap"><{$rec.Name}></td>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />&nbsp;<{$rec.FormattedCount}></td></tr>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{* OS *}>
+<{if $os.Title != ''}>
+<table width="100%" summary="<{$os.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$os.Title}></th></tr>
+<{foreach item=rec from=$os.Data}>
+<tr>
+<td class="head" nowrap="nowrap"><{$rec.Name}></td>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />&nbsp;<{$rec.FormattedCount}></td></tr>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{* Browser *}>
+<{if $browser.Title != ''}>
+<table width="100%" summary="<{$browser.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$browser.Title}></th></tr>
+<{foreach item=rec from=$browser.Data}>
+<tr>
+<td class="head" nowrap="nowrap"><{$rec.Name}></td>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />&nbsp;<{$rec.FormattedCount}></td></tr>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{* Recent Days *}>
+<{if $recent.Title != ''}>
+<table width="100%" summary="<{$recent.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$recent.Title}></th></tr>
+<{foreach item=rec from=$recent.Data}>
+<tr>
+<td class="head" nowrap="nowrap"><{$rec.Name}></td>
+<{if $cfg.NO_ROBOT_COUNT}>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />&nbsp;<{$rec.FormattedCount}></td></tr>
+<{else}>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.NoRobotWidth}>" height="6" border="0" style="margin-right:0;" alt="<{$rec.NoRobot}>" /><img src="<{$xoops_url}>/modules/logcounterx/images/bar2.gif" width="<{$rec.RobotWidth}>" height="6" border="0" alt="Robot : <{$rec.Robot}>" style="margin-left:0; margin-right:0;" />&nbsp;<{$rec.FormattedCount}></td></tr>
+<{/if}>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{* Record Days *}>
+<{if $record.Title != ''}>
+<table width="100%" summary="<{$record.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$record.Title}></th></tr>
+<{foreach item=rec from=$record.Data}>
+<tr>
+<td class="head" nowrap="nowrap"><{$rec.Name}></td>
+<{if $cfg.NO_ROBOT_COUNT}>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />&nbsp;<{$rec.FormattedCount}></td></tr>
+<{else}>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.NoRobotWidth}>" height="6" border="0" style="margin-right:0;" alt="<{$rec.NoRobot}>" /><img src="<{$xoops_url}>/modules/logcounterx/images/bar2.gif" width="<{$rec.RobotWidth}>" height="6" border="0" alt="Robot : <{$rec.Robot}>" style="margin-left:0; margin-right:0;" />&nbsp;<{$rec.FormattedCount}></td></tr>
+<{/if}>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{* Day of the Week *}>
+<{if $weekday.Title != ''}>
+<table width="100%" summary="<{$weekday.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$weekday.Title}></th></tr>
+<{foreach item=rec from=$weekday.Data}>
+<tr>
+<td class="head" nowrap="nowrap"><{$rec.Name}></td>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />&nbsp;<{$rec.FormattedCount}>&nbsp;(<{$rec.Percent}>%)</td></tr>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{* Hour *}>
+<{if $hours.Title != ''}>
+<table width="100%" summary="<{$hours.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$hours.Title}></th></tr>
+<{foreach item=rec from=$hours.Data}>
+<tr>
+<td class="head" nowrap="nowrap"><{$rec.Name}></td>
+<{if $cfg.NO_ROBOT_COUNT}>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />&nbsp;<{$rec.FormattedCount}>&nbsp;(<{$rec.Percent}>%)</td></tr>
+<{else}>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.NoRobotWidth}>" height="6" border="0" style="margin-right:0;" alt="<{$rec.NoRobot}>" /><img src="<{$xoops_url}>/modules/logcounterx/images/bar2.gif" width="<{$rec.RobotWidth}>" height="6" border="0" alt="Robot : <{$rec.Robot}>" style="margin-left:0; margin-right:0;" />&nbsp;<{$rec.FormattedCount}>&nbsp;(<{$rec.Percent}>%)</td></tr>
+<{/if}>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{* Remote Host *}>
+<{if $host.Title != ''}>
+<table width="100%" summary="<{$host.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$host.Title}></th></tr>
+<{foreach item=rec from=$host.Data}>
+<tr>
+<td class="head" nowrap="nowrap"><{$rec.Name}></td>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />&nbsp;<{$rec.FormattedCount}></td></tr>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{* User Name *}>
+<{if $uname.Title != ''}>
+<table width="100%" summary="<{$uname.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$uname.Title}></th></tr>
+<{foreach item=rec from=$uname.Data}>
+<tr>
+<td class="head" nowrap="nowrap"><{$rec.Name}></td>
+<td class="<{cycle values="even,odd"}>"><img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />&nbsp;<{$rec.FormattedCount}></td></tr>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{* Referer (Full) *}>
+<{if $referer.Title != ''}>
+<table width="100%" summary="<{$referer.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$referer.Title}></th></tr>
+<{foreach item=rec from=$referer.Data}>
+<tr>
+<{if $rec.Link != ''}>
+<td class="head" nowrap="nowrap"><a href="<{$rec.Link}>" title="<{$rec.Name}>" target="_blank"><{$rec.ShortName}></a></td>
+<{else}>
+<td class="head" nowrap="nowrap"><{$rec.ShortName}></td>
+<{/if}>
+<td class="<{cycle values="even,odd"}>" align="right"><!--<img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />-->&nbsp;<{$rec.FormattedCount}></td></tr>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{* Referer (Full) *}>
+<{if $referer2.Title != ''}>
+<table width="100%" summary="<{$referer.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$referer2.Title}> (Except for Search-Engines)</th></tr>
+<{foreach item=rec from=$referer2.Data}>
+<tr>
+<{if $rec.Link != ''}>
+<td class="head" nowrap="nowrap"><a href="<{$rec.Link}>" title="<{$rec.Name}>" target="_blank"><{$rec.ShortName}></a></td>
+<{else}>
+<td class="head" nowrap="nowrap"><{$rec.ShortName}></td>
+<{/if}>
+<td class="<{cycle values="even,odd"}>" align="right"><!--<img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />-->&nbsp;<{$rec.FormattedCount}></td></tr>
+<{/foreach}>
+</table>
+<br />
+<{/if}>
+
+<{* Path Info *}>
+<{if $pathinfo.Title != ''}>
+<table width="100%" summary="<{$pathinfo.Title}>">
+<tr><th colspan="2" nowrap="nowrap"><{$pathinfo.Title}></th></tr>
+<{foreach item=rec from=$pathinfo.Data}>
+<tr>
+<td class="head" nowrap="nowrap"><span title="<{$rec.Name}>"><{$rec.ShortName}></span></td>
+<td class="<{cycle values="even,odd"}>" align="right"><!--<img src="<{$xoops_url}>/modules/logcounterx/images/bar.gif" width="<{$rec.Width}>" height="6" border="0" alt="<{$rec.Name}>" />-->&nbsp;<{$rec.FormattedCount}></td></tr>
+<{/foreach}>
+</table>
+<{/if}>
+
+<div style="font-size:xx-small; text-align:center;"><a href="http://xoops.taquino.net/" target="_blank">LogCounterX by Taq</a></div>
