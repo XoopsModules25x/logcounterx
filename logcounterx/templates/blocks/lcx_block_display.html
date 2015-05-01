@@ -1,0 +1,15 @@
+<table>
+<{foreach item=count from=$block.counts}>
+<{if $block.use_char}>
+<{* Display Counter by Letters   from here *}>
+<tr><td nowrap="nowrap"><{$count.title}></td>
+<td align="right" nowrap="nowrap"><span style="<{$block.style}>"><{$count.count}></span></td></tr>
+<{* Display Counter by Letters    end here *}>
+<{else}>
+<{* Display Counter by Images      from here *}>
+<tr><td nowrap="nowrap"><{$count.title}></td>
+<td align="right" nowrap="nowrap"><{foreach item=digit from=$count.digits}><img src="<{$xoops_url}>/modules/logcounterx/images/<{$block.imagedir}><{$digit}>.gif" alt="<{$count.count}>" border="0" <{$block.imageattr}>/><{/foreach}></td></tr>
+<{* Display Counter by Images       end here *}>
+<{/if}>
+<{/foreach}>
+</table>
