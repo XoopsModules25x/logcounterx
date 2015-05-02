@@ -3,12 +3,17 @@
 ---------------------------------------
 - added switch for XOOPS 2.5.7 Admin GUI (mamba)
 - replaced "eregi" with "preg_match (mamba)
-- replaced "dirname( __FILE__ )" with "__DIR__" (mamba)
+- replaced "dirname(__FILE__)" with "__DIR__" (mamba)
 - replaced "intval" with "(int)" (mamba)
+- replaced "strval" with "(string)" (mamba)
 - added some missing translations (mamba)
 - replaced "sizeof" with "count" (mamba)
 - replaced "fputs" with "fwrite" (mamba)
- - some PSR-2 adjustments (mamba)
+- some PSR-2 adjustments (mamba)
+- raplace $i++ with ++$i (mamba)
+- replaced Database::getInstance() with XoopsDatabaseFactory::getDatabaseConnection() (mamba)
+- added PhpDoc (mamba)
+- code simplications (mamba)
 
 ---------------------------------------
 2.74                      2015-05-01

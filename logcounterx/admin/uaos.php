@@ -20,10 +20,9 @@ $C = ' class="even"';
 while ($d = $xoopsDB->fetchArray($res)) {
     $A = (($d['agent'] == 'undefined') ? ' style="color:RED;"' : '');
     $O = (($d['os'] == 'undefined') ? ' style="color:RED;"' : '');
+    $U = '';
     if (($d['agent'] == 'unknown') && ($d['os'] == 'unknown')) {
         $U = ' style="color:RED;"';
-    } else {
-        $U = '';
     }
     $A = (preg_match('/Robot/i', $d['agent']) ? ' style="color:ORANGE;"' : '');
     print '<tr' . $C . '>' .

@@ -44,7 +44,7 @@ if (isset($_POST['command'])) {
         }
     }
     if ($_POST['command'] == 'DELETEIP') {
-        for ($i = 1; $i <= (int)($_POST['count']); $i++) {
+        for ($i = 1; $i <= (int)($_POST['count']); ++$i) {
             if (isset($_POST['mark' . $i]) && ($_POST['mark' . $i] == 'on')) {
                 $sql = "DELETE FROM " . $xoopsDB->prefix("logcounterx_cfg") .
                        " WHERE recid = " . (int)($_POST['id' . $i]) . " AND cfgname = 'IGNORE_HOST'";
@@ -62,7 +62,7 @@ if (isset($_POST['command'])) {
         }
     }
     if ($_POST['command'] == 'DELETEREF') {
-        for ($i = 1; $i <= (int)($_POST['count']); $i++) {
+        for ($i = 1; $i <= (int)($_POST['count']); ++$i) {
             if (isset($_POST['mark' . $i]) && ($_POST['mark' . $i] == 'on')) {
                 $sql = "DELETE FROM " . $xoopsDB->prefix("logcounterx_cfg") .
                        " WHERE recid = " . (int)($_POST['id' . $i]) . " AND cfgname = 'IGNORE_REFERER'";
@@ -208,7 +208,7 @@ if (($xoopsDB->getrowsNum($res)) > 0) {
              '<span style="font-weight: normal;">' . _LCX_ADM_DELETEIP_DESC . '</span></td>' .
              '<td class="even"><table cellpadding="3">';
     while (list($RecID, $IgHost) = $xoopsDB->fetchRow($res)) {
-        $i++;
+        ++$i;
         $RecID  = (int)($RecID);
         $IgHost = $IgHost;
         print    '<tr><td><input type="checkbox" name="mark' . $i . '" value="on"></td>' .
@@ -249,7 +249,7 @@ if (($xoopsDB->getrowsNum($res)) > 0) {
              '<span style="font-weight: normal;">' . _LCX_ADM_DELETEREF_DESC . '</span></td>' .
              '<td class="even"><table cellpadding="3">';
     while (list($RecID, $IgReferer) = $xoopsDB->fetchRow($res)) {
-        $i++;
+        ++$i;
         $RecID  = (int)($RecID);
         $IgHost = $IgReferer;
         print    '<tr><td><input type="checkbox" name="mark' . $i . '" value="on"></td>' .

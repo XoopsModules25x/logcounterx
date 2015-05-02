@@ -3,6 +3,9 @@
 // nobunobu's suggestions are applied
 
 if (!class_exists('XoopsGTicket')) {
+    /**
+     * Class XoopsGTicket
+     */
     class XoopsGTicket
     {
 
@@ -10,36 +13,73 @@ if (!class_exists('XoopsGTicket')) {
         public $_latest_token = '';
 
         // render form as plain html
+        /**
+         * @param string $salt
+         * @param int    $timeout
+         * @param string $area
+         * @return string
+         */
         public function getTicketHtml($salt = '', $timeout = 1800, $area = '')
         {
             return '<input type="hidden" name="XOOPS_G_TICKET" value="' . $this->issue($salt, $timeout, $area) . '" />';
         }
 
         // returns an object of XoopsFormHidden including theh ticket
+        /**
+         * @param string $salt
+         * @param int    $timeout
+         * @param string $area
+         * @return XoopsFormHidden
+         */
         public function getTicketXoopsForm($salt = '', $timeout = 1800, $area = '')
         {
             return new XoopsFormHidden('XOOPS_G_TICKET', $this->issue($salt, $timeout, $area));
         }
 
         // add a ticket as Hidden Element into XoopsForm
+        /**
+         * @param        $form
+         * @param string $salt
+         * @param int    $timeout
+         * @param string $area
+         */
         public function addTicketXoopsFormElement(&$form, $salt = '', $timeout = 1800, $area = '')
         {
             $form->addElement(new XoopsFormHidden('XOOPS_G_TICKET', $this->issue($salt, $timeout, $area)));
         }
 
         // returns an array for xoops_confirm() ;
+        /**
+         * @param string $salt
+         * @param int    $timeout
+         * @param string $area
+         * @return array
+         */
         public function getTicketArray($salt = '', $timeout = 1800, $area = '')
         {
             return array('XOOPS_G_TICKET' => $this->issue($salt, $timeout, $area));
         }
 
         // return GET parameter string.
+        /**
+         * @param string $salt
+         * @param bool   $noamp
+         * @param int    $timeout
+         * @param string $area
+         * @return string
+         */
         public function getTicketParamString($salt = '', $noamp = false, $timeout = 1800, $area = '')
         {
             return ($noamp ? '' : '&amp;') . 'XOOPS_G_TICKET=' . $this->issue($salt, $timeout, $area);
         }
 
         // issue a ticket
+        /**
+         * @param string $salt
+         * @param int    $timeout
+         * @param string $area
+         * @return string
+         */
         public function issue($salt = '', $timeout = 1800, $area = '')
         {
             global $xoopsModule;
@@ -55,7 +95,7 @@ if (!class_exists('XoopsGTicket')) {
             }
 
             // limit max stubs 10
-            if (sizeof($_SESSION['XOOPS_G_STUBS']) > 10) {
+            if (count($_SESSION['XOOPS_G_STUBS']) > 10) {
                 $_SESSION['XOOPS_G_STUBS'] = array_slice($_SESSION['XOOPS_G_STUBS'], -10);
             }
 
@@ -80,6 +120,11 @@ if (!class_exists('XoopsGTicket')) {
         }
 
         // check a ticket
+        /**
+         * @param bool   $post
+         * @param string $area
+         * @return bool
+         */
         public function check($post = true, $area = '')
         {
             global $xoopsModule;
@@ -174,6 +219,9 @@ if (!class_exists('XoopsGTicket')) {
         }
 
         // Ticket Using
+        /**
+         * @return bool
+         */
         public function using()
         {
             if (!empty($_SESSION['XOOPS_G_STUBS'])) {
@@ -184,6 +232,10 @@ if (!class_exists('XoopsGTicket')) {
         }
 
         // return errors
+        /**
+         * @param bool $ashtml
+         * @return array|string
+         */
         public function getErrors($ashtml = true)
         {
             if ($ashtml) {
@@ -208,6 +260,10 @@ if (!class_exists('XoopsGTicket')) {
 if (!function_exists('admin_refcheck')) {
 
     //Admin Referer Check By Marijuana(Rev.011)
+    /**
+     * @param string $chkref
+     * @return bool
+     */
     function admin_refcheck($chkref = "")
     {
         if (empty($_SERVER['HTTP_REFERER'])) {

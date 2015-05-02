@@ -38,7 +38,7 @@ if (isset($block['name'])) {
     $form->addElement(new XoopsFormLabel(_AM_NAME, $block['name']));
 }
 $side_select = new XoopsFormSelect(_AM_BLKTYPE, "bside", $block['side']);
-$side_select->addOptionArray(array(0 => _AM_SBLEFT, 1 => _AM_SBRIGHT, 3 => _AM_CBLEFT, 4 => _AM_CBRIGHT, 5 => _AM_CBCENTER, ));
+$side_select->addOptionArray(array(0 => _AM_SBLEFT, 1 => _AM_SBRIGHT, 3 => _AM_CBLEFT, 4 => _AM_CBRIGHT, 5 => _AM_CBCENTER ));
 $form->addElement($side_select);
 $form->addElement(new XoopsFormText(_AM_WEIGHT, "bweight", 2, 5, $block['weight']));
 $form->addElement(new XoopsFormRadioYN(_AM_VISIBLE, 'bvisible', $block['visible']));
@@ -55,7 +55,6 @@ $form->addElement($mod_select);
 $form->addElement(new XoopsFormText(_AM_TITLE, 'btitle', 50, 255, $block['title']), false);
 
 if ($block['is_custom']) {
-
     // Custom Block's textarea
     $notice_for_tags = '<span style="font-size:x-small;font-weight:bold;">' . _AM_USEFULTAGS . '</span><br /><span style="font-size:x-small;font-weight:normal;">' . sprintf(_AM_BLOCKTAG1, '{X_SITEURL}', XOOPS_URL . '/') . '</span>';
     $current_op      = @$_GET['op'] == 'clone' ? 'clone' : 'edit';
@@ -98,7 +97,7 @@ if ($block['is_custom']) {
             }
         }
     }
-    if ($block['edit_form'] != false) {
+    if ($block['edit_form'] !== false) {
         $form->addElement(new XoopsFormLabel(_AM_OPTIONS, $block['edit_form']));
     }
 }
@@ -119,6 +118,9 @@ $button_tray->addElement(new XoopsFormButton('', 'submitblock', $block['submit_b
 $form->addElement($button_tray);
 
 // checks browser compatibility with the control
+/**
+ * @return bool
+ */
 function check_browser_can_use_spaw()
 {
     $browser = $_SERVER['HTTP_USER_AGENT'];

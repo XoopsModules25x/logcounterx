@@ -5,6 +5,9 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 include_once XOOPS_ROOT_PATH . "/modules/logcounterx/include/functions.php";
 
+/**
+ * @return string
+ */
 function b_logcounterx_inc_counter()
 {
     global $xoopsDB, $xoopsUser;
