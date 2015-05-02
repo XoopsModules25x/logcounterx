@@ -1,11 +1,9 @@
 <?php
 
-define("_LCX_BLK_NAME",			"ºô¯¸­p¼Æ¾¹");
-define("_LCX_BLK_TOTAL",		"Á`­p¡G");
-define("_LCX_BLK_DAY",			"¤µ¤Ñ¡G");
-define("_LCX_BLK_YESTERDAY",	"¬Q¤Ñ¡G");
-define("_LCX_BLK_WEEK",			"¥»¶g¡G");
-define("_LCX_BLK_MONTH",		"¥»¤ë¡G");
-define("_LCX_BLK_AVE",			"¥­§¡¡G");
-
-?>
+define("_LCX_BLK_NAME", "ç¶²ç«™è¨ˆæ•¸å™¨");
+define("_LCX_BLK_TOTAL", "ç¸½è¨ˆï¼š");
+define("_LCX_BLK_DAY", "ä»Šå¤©ï¼š");
+define("_LCX_BLK_YESTERDAY", "æ˜¨å¤©ï¼š");
+define("_LCX_BLK_WEEK", "æœ¬é€±ï¼š");
+define("_LCX_BLK_MONTH", "æœ¬æœˆï¼š");
+define("_LCX_BLK_AVE", "å¹³å?‡ï¼š");

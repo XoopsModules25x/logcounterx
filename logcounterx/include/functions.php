@@ -1,290 +1,676 @@
 <?php
-if (!defined('XOOPS_ROOT_PATH')) { exit(); }
+if (!defined('XOOPS_ROOT_PATH')) {
+    exit();
+}
 
 if (!defined('LCX_LIBRARY_LOADED')) {
-	define('LCX_LIBRARY_LOADED',1);
+    define('LCX_LIBRARY_LOADED', 1);
 
-// Load query conversion function file
-include XOOPS_ROOT_PATH."/modules/logcounterx/include/query_word.php";
+    // Load query conversion function file
+    include XOOPS_ROOT_PATH . "/modules/logcounterx/include/query_word.php";
 
-// Select OS according to USER_AGENT
-function lcx_ua2os($agent = '') {
-	if ($agent == '') { return 'undefined'; }
+    // Select OS according to USER_AGENT
+    function lcx_ua2os($agent = '')
+    {
+        if ($agent == '') {
+            return 'undefined';
+        }
 
-	if (eregi('Windows 95', $agent) || eregi('Win95', $agent)) { return 'Win95'; }
-	if (eregi('Win 9x 4\.90', $agent)) { return 'WinME'; }
-	if (eregi('Windows 98', $agent) || eregi('Win98', $agent)) { return 'Win98'; }
-	if (eregi('Windows 2000', $agent) || eregi('Win2000', $agent)) { return 'Win2000'; }
-	if (eregi('Windows NT 5\.0', $agent) || eregi('WinNT 5\.0', $agent)) { return 'Win2000'; }
-	if (eregi('Windows NT 5\.1', $agent) || eregi('WinNT 5\.1', $agent)) { return 'WinXP'; }
-	if (eregi('Windows NT 6\.0', $agent) || eregi('WinNT 6\.0', $agent)) { return 'WinVista'; }
-	if (eregi('Windows NT 6\.1', $agent) || eregi('WinNT 6\.1', $agent)) { return 'Windows7'; }
-	if (eregi('Windows NT', $agent) || eregi('WinNT', $agent)) { return 'WinNT'; }
-	if (eregi('Windows XP', $agent) || eregi('WinXP', $agent)) { return 'WinXP'; }
-	if (eregi('Borg', $agent) || eregi('Win32', $agent)) { return 'Win32'; }
-	if (eregi('Windows CE', $agent) || eregi('WinCE', $agent)) { return 'WinCE'; }
-	if (eregi('Mac', $agent)) { return 'Mac'; }
-	if (eregi('OmniWeb', $agent) || eregi('iCab', $agent) || eregi('Safari', $agent)) { return 'Mac'; }
-	if (eregi('Lindows', $agent)) { return 'Lindows'; }
-	if (eregi('Linux', $agent) || eregi('Kondara', $agent) || eregi('Vine', $agent) || eregi('Debian', $agent)) { return 'Linux'; }
-	if (eregi('Fedora', $agent) || eregi('Laser5', $agent)) { return 'Linux'; }
-	if (eregi('BSD', $agent)) { return 'UNIX (BSD)'; }
-	if (eregi('X11', $agent) || eregi('SunOS', $agent) || eregi('HP-UX', $agent)) { return 'UNIX'; }
-	if (eregi('AIX', $agent) || eregi('IRIX', $agent) || eregi('OSF1', $agent)) { return 'UNIX'; }
-	if (eregi('BTRON', $agent)) { return 'BTRON'; }
-	if (eregi('DreamPassport', $agent)) { return 'Dreamcast'; }
-	if (eregi('DoCoMo', $agent)) { return 'Docomo'; }
-	if (eregi('UP\.Browser', $agent)) { return 'AU (KDDI)'; }
-	if (eregi('Vodafone', $agent) || eregi('J-PHONE', $agent)) { return 'Vodafone'; }
-	if (eregi('DDIPOCKET', $agent) || eregi('AH-K3001V', $agent)) { return 'WILLCOM'; }
-	if (eregi('PalmOS', $agent)) { return 'PalmOS '; }
-	if (eregi('PlayStation ', $agent)) { return 'PlayStation '; }
+        if (preg_match('/Windows 95/i', $agent) || preg_match('/Win95/i', $agent)) {
+            return 'Win95';
+        }
+        if (preg_match('/Win 9x 4\.90/i', $agent)) {
+            return 'WinME';
+        }
+        if (preg_match('/Windows 98/i', $agent) || preg_match('/Win98/i', $agent)) {
+            return 'Win98';
+        }
+        if (preg_match('/Windows 2000/i', $agent) || preg_match('/Win2000/i', $agent)) {
+            return 'Win2000';
+        }
+        if (preg_match('/Windows NT 5\.0/i', $agent) || preg_match('/WinNT 5\.0/i', $agent)) {
+            return 'Win2000';
+        }
+        if (preg_match('/Windows NT 5\.1/i', $agent) || preg_match('/WinNT 5\.1/i', $agent)) {
+            return 'WinXP';
+        }
+        if (preg_match('/Windows NT 6\.0/i', $agent) || preg_match('/WinNT 6\.0/i', $agent)) {
+            return 'WinVista';
+        }
+        if (preg_match('/Windows NT 6\.1/i', $agent) || preg_match('/WinNT 6\.1/i', $agent)) {
+            return 'Windows7';
+        }
+        if (preg_match('/Windows NT/i', $agent) || preg_match('/WinNT/i', $agent)) {
+            return 'WinNT';
+        }
+        if (preg_match('/Windows XP/i', $agent) || preg_match('/WinXP/i', $agent)) {
+            return 'WinXP';
+        }
+        if (preg_match('/Borg/i', $agent) || preg_match('/Win32/i', $agent)) {
+            return 'Win32';
+        }
+        if (preg_match('/Windows CE/i', $agent) || preg_match('/WinCE/i', $agent)) {
+            return 'WinCE';
+        }
+        if (preg_match('/Mac/i', $agent)) {
+            return 'Mac';
+        }
+        if (preg_match('/OmniWeb/i', $agent) || preg_match('/iCab/i', $agent) || preg_match('/Safari/i', $agent)) {
+            return 'Mac';
+        }
+        if (preg_match('/Lindows/i', $agent)) {
+            return 'Lindows';
+        }
+        if (preg_match('/Linux/i', $agent) || preg_match('/Kondara/i', $agent) || preg_match('/Vine/i', $agent) || preg_match('/Debian/i', $agent)) {
+            return 'Linux';
+        }
+        if (preg_match('/Fedora/i', $agent) || preg_match('/Laser5/i', $agent)) {
+            return 'Linux';
+        }
+        if (preg_match('/BSD/i', $agent)) {
+            return 'UNIX (BSD)';
+        }
+        if (preg_match('/X11/i', $agent) || preg_match('/SunOS/i', $agent) || preg_match('/HP-UX/i', $agent)) {
+            return 'UNIX';
+        }
+        if (preg_match('/AIX/i', $agent) || preg_match('/IRIX/i', $agent) || preg_match('/OSF1/i', $agent)) {
+            return 'UNIX';
+        }
+        if (preg_match('/BTRON/i', $agent)) {
+            return 'BTRON';
+        }
+        if (preg_match('/DreamPassport/i', $agent)) {
+            return 'Dreamcast';
+        }
+        if (preg_match('/DoCoMo/i', $agent)) {
+            return 'Docomo';
+        }
+        if (preg_match('/UP\.Browser/i', $agent)) {
+            return 'AU (KDDI)';
+        }
+        if (preg_match('/Vodafone/i', $agent) || preg_match('/J-PHONE/i', $agent)) {
+            return 'Vodafone';
+        }
+        if (preg_match('/DDIPOCKET/i', $agent) || preg_match('/AH-K3001V/i', $agent)) {
+            return 'WILLCOM';
+        }
+        if (preg_match('/PalmOS/i', $agent)) {
+            return 'PalmOS ';
+        }
+        if (preg_match('/PlayStation /i', $agent)) {
+            return 'PlayStation ';
+        }
 
-	return '(undefined)';
+        return '(undefined)';
+    }
 
+    // Select BROWSER according to USER_AGENT
+    function lcx_ua2br($agent = '')
+    {
+        if ($agent == '') {
+            return 'undefined';
+        }
+
+        //	Proxy
+        if (preg_match('/Google.*Proxy/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+
+        //	Robots
+        if (preg_match('/aaacafe/i', $agent)) {
+            return 'Robot (AAA!CAFE)';
+        }
+        if (preg_match('/acoon\.de/i', $agent)) {
+            return 'Robot (Acoon.de)';
+        }
+        if (preg_match('/accoona/i', $agent)) {
+            return 'Robot (Accoona)';
+        }
+        if (preg_match('/aggregator:MyRSS.jp/i', $agent)) {
+            return 'Robot (MyRSS.jp)';
+        }
+        if (preg_match('/ArchitextSpider/i', $agent)) {
+            return 'Robot (Excite)';
+        }
+        if (preg_match('/Ask Jeeves/i', $agent)) {
+            return 'Robot (Ask Jeeves)';
+        }
+        if (preg_match('/Baiduspider/i', $agent)) {
+            return 'Robot (Baidu)';
+        }
+        if (preg_match('/BecomeJPBot/i', $agent)) {
+            return 'Robot (BecomeJP)';
+        }
+        if (preg_match('/bingbot/i', $agent)) {
+            return 'Robot (Bing)';
+        }
+        if (preg_match('/Cerberian/i', $agent)) {
+            return 'Robot (Cerberian)';
+        }
+        if (preg_match('/Comaneci_bot/i', $agent)) {
+            return 'Robot (i-know.jp)';
+        }
+        if (preg_match('/Cowbot/i', $agent)) {
+            return 'Robot (Naver)';
+        }
+        if (preg_match('/Convera/i', $agent)) {
+            return 'Robot (Convera)';
+        }
+        if (preg_match('/Twiceler/i', $agent)) {
+            return 'Robot (Cuill)';
+        }
+        if (preg_match('/discobot/i', $agent)) {
+            return 'Robot (discovery engine)';
+        }
+        if (preg_match('/Down Site Checker/i', $agent)) {
+            return 'Robot (Yahoo!)';
+        }
+        if (preg_match('/Drecombot/i', $agent)) {
+            return 'Robot (Drecom)';
+        }
+        if (preg_match('/emyuu_bot/i', $agent)) {
+            return 'Robot (Emyuu)';
+        }
+        if (preg_match('/Ezooms/i', $agent)) {
+            return 'Robot (ezoom)';
+        }
+        if (preg_match('/facebook/i', $agent)) {
+            return 'Robot (facebook)';
+        }
+        if (preg_match('/FAST-WebCrawler/i', $agent)) {
+            return 'Robot (fast.no)';
+        }
+        if (preg_match('/findlinks/i', $agent)) {
+            return 'Robot (findlinks)';
+        }
+        if (preg_match('/Gaisbot/i', $agent)) {
+            return 'Robot (Openfind)';
+        }
+        if (preg_match('/gazz/i', $agent)) {
+            return 'Robot (NTTR)';
+        }
+        if (preg_match('/Gigabot/i', $agent)) {
+            return 'Robot (Gigabot)';
+        }
+        if (preg_match('/Slurp\.so/Goo/i', $agent)) {
+            return 'Robot (goo)';
+        }
+        //	if (preg_match('/Google/i',		$agent)) { return 'Robot (Google)'; }
+        if (preg_match('/Googlebot/i', $agent)) {
+            return 'Robot (Google)';
+        }
+        if (preg_match('/grub-client/i', $agent)) {
+            return 'Robot (grub-client)';
+        }
+        if (preg_match('/Hatena Antenna/i', $agent)) {
+            return 'Robot (Hatena)';
+        }
+        if (preg_match('/ia_archiver/i', $agent)) {
+            return 'Robot (Archiver)';
+        }
+        if (preg_match('/iaskspider/i', $agent)) {
+            return 'Robot (iAsk)';
+        }
+        if (preg_match('/\.ibm\.com/i', $agent)) {
+            return 'Robot (IBM)';
+        }
+        if (preg_match('/ichiro/i', $agent)) {
+            return 'Robot (NTTR)';
+        }
+        if (preg_match('/indexpert/i', $agent)) {
+            return 'Robot (Fresheye)';
+        }
+        if (preg_match('/Indy Library/i', $agent)) {
+            return 'Robot (Indy Library)';
+        }
+        if (preg_match('/Infoseek/i', $agent)) {
+            return 'Robot (Infoseek)';
+        }
+        if (preg_match('/Inktomi/i', $agent)) {
+            return 'Robot (Inktomi)';
+        }
+        if (preg_match('/livedoorCheckers/i', $agent)) {
+            return 'Robot (LivedoorCheckers)';
+        }
+        if (preg_match('/Looksmart/i', $agent)) {
+            return 'Robot (Looksmart)';
+        }
+        if (preg_match('/Lycos_Spider/i', $agent)) {
+            return 'Robot (Lycos)';
+        }
+        if (preg_match('/MarkAgent/i', $agent)) {
+            return 'Robot (MarkAgent)';
+        }
+        if (preg_match('/MJ12bot/i', $agent)) {
+            return 'Robot (majestic12)';
+        }
+        if (preg_match('/MLBot/i', $agent)) {
+            return 'Robot (Metadata Labs)';
+        }
+        if (preg_match('/msnbot/i', $agent)) {
+            return 'Robot (MSN)';
+        }
+        if (preg_match('/NaverRobot/i', $agent)) {
+            return 'Robot (Naver)';
+        }
+        if (preg_match('/nyanyu/i', $agent)) {
+            return 'Robot (nyanyu)';
+        }
+        if (preg_match('/ndl-japan/i', $agent)) {
+            return 'Robot (ndl-japan)';
+        }
+        if (preg_match('/NPBot/i', $agent)) {
+            return 'Robot (NameProtect)';
+        }
+        if (preg_match('/Nutch/i', $agent)) {
+            return 'Robot (Nutch)';
+        }
+        if (preg_match('/Nutraspace/i', $agent)) {
+            return 'Robot (nutraspace)';
+        }
+        if (preg_match('/OmniExplorer/i', $agent)) {
+            return 'Robot (OmniExplorer)';
+        }
+        if (preg_match('/onet\.pl/i', $agent)) {
+            return 'Robot (onet.pl)';
+        }
+        if (preg_match('/Pockey-GetHTML/i', $agent)) {
+            return 'Robot (GetHTML)';
+        }
+        if (preg_match('/psbot/i', $agent)) {
+            return 'Robot (Picsearch)';
+        }
+        if (preg_match('/SBIder/i', $agent)) {
+            return 'Robot (SiteSell)';
+        }
+        if (preg_match('/Scooter/i', $agent)) {
+            return 'Robot (AltaVista)';
+        }
+        if (preg_match('/search-hp/i', $agent)) {
+            return 'Robot (search-hp)';
+        }
+        if (preg_match('/Sidewinder/i', $agent)) {
+            return 'Robot (Infoseek)';
+        }
+        if (preg_match('/Sogou/i', $agent)) {
+            return 'Robot (Sogou)';
+        }
+        if (preg_match('/sohu-search/i', $agent)) {
+            return 'Robot (Sohu)';
+        }
+        if (preg_match('/StackRambler/i', $agent)) {
+            return 'Robot (Rambler)';
+        }
+        if (preg_match('/Speedy Spider/i', $agent)) {
+            return 'Robot (entireweb)';
+        }
+        if (preg_match('/Su-Jine/i', $agent)) {
+            return 'Robot (Su-Jine)';
+        }
+        if (preg_match('/TOCC/i', $agent)) {
+            return 'Robot (TOCC)';
+        }
+        if (preg_match('/Ultraseek/i', $agent)) {
+            return 'Robot (Ultraseek)';
+        }
+        if (preg_match('/walhello/i', $agent)) {
+            return 'Robot (Walhello)';
+        }
+        if (preg_match('/WebAlta/i', $agent)) {
+            return 'Robot (WebAlta)';
+        }
+        if (preg_match('/WebCrawler/i', $agent)) {
+            return 'Robot (WebCrawler)';
+        }
+        if (preg_match('/WISEbot/i', $agent)) {
+            return 'Robot (WISEbot)';
+        }
+        if (preg_match('/Y!J-DSC/i', $agent)) {
+            return 'Robot (Yahoo!)';
+        }
+        if (preg_match('/Y!J-BSC/i', $agent)) {
+            return 'Robot (Yahoo!)';
+        }
+        if (preg_match('/Yahoo! /i', $agent)) {
+            return 'Robot (Yahoo!)';
+        }
+        if (preg_match('/Yeti/i', $agent)) {
+            return 'Robot (Naver)';
+        }
+        if (preg_match('/YodaoBot/i', $agent)) {
+            return 'Robot (youdao)';
+        }
+        if (preg_match('/ZyBorg/i', $agent)) {
+            return 'Robot (LYCOS)';
+        }
+
+        //	Other Robots
+        if (preg_match('/crawler/i', $agent)) {
+            return 'Robot (others)';
+        }
+        if (preg_match('/robot/i', $agent)) {
+            return 'Robot (others)';
+        }
+        if (preg_match('/spider/i', $agent)) {
+            return 'Robot (others)';
+        }
+        if (preg_match('/WebBot/i', $agent)) {
+            return 'Robot (others)';
+        }
+        //if (preg_match('/bot/i',		$agent)) { return 'Robot (others)'; }
+
+        //	Automations
+        if (preg_match('/Arachmo/i', $agent)) {
+            return 'Arachmo';
+        }
+        if (preg_match('/aggregator:MyRSS/i', $agent)) {
+            return 'MyRSS.jp';
+        }
+        if (preg_match('/bookmark\.ne\.jp/i', $agent)) {
+            return 'Bookmark';
+        }
+        if (preg_match('/Curl/i', $agent)) {
+            return 'Curl';
+        }
+        if (preg_match('/Hatena/i', $agent)) {
+            return 'Hatena';
+        }
+        if (preg_match('/^Java[\d_\/\.]+$/i', $agent)) {
+            return 'Program (Java)';
+        }
+        if (preg_match('/Java\(TM\).*Runtime/i', $agent)) {
+            return 'Program (Java)';
+        }
+        if (preg_match('/libwww-perl/i', $agent)) {
+            return 'Program (Perl)';
+        }
+        if (preg_match('/Microsoft URL Control/i', $agent)) {
+            return 'Program (Windows)';
+        }
+        if (preg_match('/PerManSurfer/i', $agent)) {
+            return 'PerManSurfer';
+        }
+        if (preg_match('/PHP/i', $agent)) {
+            return 'Program (PHP)';
+        }
+        if (preg_match('/POE-Component/i', $agent)) {
+            return 'Program (Perl)';
+        }
+        if (preg_match('/samidare/i', $agent)) {
+            return 'samidare';
+        }
+        if (preg_match('/Snoopy/i', $agent)) {
+            return 'Robot (Program (Snoopy))';
+        }
+        if (preg_match('/snoopy/i', $agent)) {
+            return 'Program (PHP)';
+        }
+        if (preg_match('/Webdup/i', $agent)) {
+            return 'Webdup';
+        }
+        if (preg_match('/WebAuto/i', $agent)) {
+            return 'WebAuto';
+        }
+        if (preg_match('/WebFetch/i', $agent)) {
+            return 'WebFetch';
+        }
+        if (preg_match('/WebWhacker/i', $agent)) {
+            return 'WebWhacker';
+        }
+        if (preg_match('/Wget/i', $agent)) {
+            return 'Wget';
+        }
+
+        //	Browsers (RSS Reader)
+        if (preg_match('/RSS_READER/i', $agent, $a)) {
+            return 'RSS_READER';
+        }
+        if (preg_match('/Headline-Reader/i', $agent, $a)) {
+            return 'Headline-Reader';
+        }
+
+        //	Other Rorbots   (including Web URL and/or Mail Address)
+        if (preg_match('#http:\/\/#i', $agent)) {
+            return 'Robot (others)';
+        }
+        if (preg_match('/[a-z]+@[a-z\.]+/i', $agent)) {
+            return 'Robot (others)';
+        }
+
+        //	Portable Devices
+        if (preg_match('/Android.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/iPad/i', $agent)) {
+            if (preg_match('/OS [0-9_]*/i', $agent, $a)) {
+                return 'iPad ' . str_replace('_', '.', $a[0]);
+            }
+        }
+        if (preg_match('/iPhone OS [0-9_]*/i', $agent, $a)) {
+            return str_replace('_', '.', $a[0]);
+        }
+        if (preg_match('/BlackBerry[0-9]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Airboard.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/(DDIPOCKET;)([A-Za-z]*)/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[1]);
+        }
+        if (preg_match('/DoCoMo.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/DreamPassport.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/J-PHONE.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/jig.browser.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/NetFront.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/UP\.Browser.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Vodafone.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+
+        //	Browsers
+        if (preg_match('/Camino.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Cuam.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/CubeBrowser.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Donut.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Firebird.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Firefox.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        //	if (preg_match('/FunWebProducts/i',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
+        if (preg_match('/Galeon.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Hotbar.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' /i', $a[0]);
+        }
+        if (preg_match('/HotJava.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' /i', $a[0]);
+        }
+        if (preg_match('/iCab.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Konqueror.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Lunascape.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' /i', $a[0]);
+        }
+        if (preg_match('/Lynx.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        //	if (preg_match('/MathPlayer /i',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
+        if (preg_match('/Maxthon/i', $agent, $a)) {
+            return str_replace('/', ' /i', $a[0]);
+        }
+        if (preg_match('/NetFront.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Ninja.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/NSPlayer.[0-9]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/OmniWeb.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Opera.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/PageNest.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' /i', $a[0]);
+        }
+        if (preg_match('/PageNest Pro.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Phoenix.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' /i', $a[0]);
+        }
+        if (preg_match('/Safari.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' /i', $a[0]);
+        }
+        //	if (preg_match('/SeaMonkey/i',			$agent, $a)) { return str_replace('/', ' /i', $a[0]); }
+        if (preg_match('/Shiira.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Sleipnir/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/Sylera.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        //	if (preg_match('/toolbar/i',			$agent, $a)) { return str_replace('/', ' ', $a[0]); }
+        if (preg_match('/TulipChain.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/w3m.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/WWWC.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+
+        //	Browsers
+        if (preg_match('/Chrome.[0-9]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/compatible;[\s]+(MSIE.[0-9\.]*)/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[1]);
+        }
+        if (preg_match('/^Mozilla/i', $agent) && preg_match('/(compatible; )([a-zA-Z \/]*[0-9\.]*)/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[2]);
+        }
+        if (preg_match('/^Mozilla.[0-9\.]*/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+        if (preg_match('/^([a-zA-Z\/]+.[0-9\.]*)$/i', $agent, $a)) {
+            return str_replace('/', ' ', $a[0]);
+        }
+
+        return '(undefined)';
+    }
+
+    function lcx_rhshort($rh)
+    {
+        if (preg_match('/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/', $rh)) {
+            return '';
+        }
+        if (preg_match('(/\.([^\.]*)){1,3}$/i', $rh, $r)) {
+            $rh = $r[0];
+        }
+        if (preg_match('/^([^\.]*)\.(.*)$/i', $rh, $r)) {
+            return $r[2];
+        }
+
+        return '';
+    }
+
+    function lcx_refshort($ref)
+    {
+        if (trim($ref == '')) {
+            return '';
+        }
+        if (!preg_match('/^(http:\/\/|https:\/\/|ftp:\/\/)/', trim($ref))) {
+            return 'Irregular Expression';
+        }
+        if (strpos('?', $ref) !== false) {
+            list($ref, $query) = explode($ref, '?', 2);
+        }
+        if (preg_match('/^(.*?\/\/)([^\/]*\/)([^\/]*\/)([^\/]*\/?)/', $ref, $r)) {
+            if ($r[3] = 'modules/') {
+                return $r[1] . $r[2];
+            } elseif ($r[4] = 'modules/') {
+                return $r[1] . $r[2] . $r[3];
+            } else {
+                return $r[0];
+            }
+        }
+
+        return '';
+    }
+
+    //	Data Conversion
+    function lcx_LogEval($OPTION = '')
+    {
+        global $xoopsDB;
+        if (strstr($OPTION, ';') || strstr($OPTION, "\n")) {
+            exit();
+        }
+        $sql    = "SELECT * FROM " . $xoopsDB->prefix("logcounterx_log") . $OPTION;
+        $result = $xoopsDB->query($sql);
+        $RecCnt = 0;
+        while ($dat = $xoopsDB->fetchArray($result)) {
+            //	Short Remote Host
+            $RHShort = addslashes(lcx_rhshort($dat['remote_host']));
+            //	Referer
+            if ($dat['referer'] != '') {
+                $RefShort = addslashes(lcx_refshort($dat['referer']));
+            } else {
+                $RefShort = '';
+            }
+            if (strpos($dat['referer'], '?') !== false) {
+                list($RefURL, $Query) = explode('?', $dat['referer'], 2);
+                $QWord  = addslashes(lcx_qu2qw($Query, $RefURL));
+                $RefURL = addslashes($RefURL);
+            } else {
+                $RefURL = $dat['referer'];
+                $Query  = '';
+                $QWord  = '';
+            }
+            $Browser = addslashes(lcx_ua2br($dat['user_agent']));
+            $OS      = addslashes(lcx_ua2os($dat['user_agent']));
+            $RecID   = (int)($dat['recid']);
+            $sql1    = "UPDATE " . $xoopsDB->prefix("logcounterx_log") . " SET " .
+                       " ref_query = '$Query', rh_short = '$RHShort', ref_short = '$RefShort'," .
+                       " agent = '$Browser', os = '$OS', qword = '$QWord' WHERE recid = $RecID";
+            $res     = $xoopsDB->queryF($sql1);
+            $RecCnt++;
+        }
+        unset($dat, $result);
+
+        return $RecCnt;
+    }
 }
-
-// Select BROWSER according to USER_AGENT
-function lcx_ua2br($agent = '') {
-	if ($agent == '') { return 'undefined'; }
-
-	//	Proxy
-	if (eregi('Google.*Proxy',$agent,$a)) { return str_replace('/', ' ', $a[0]); }
-
-	//	Robots
-	if (eregi('aaacafe',		$agent)) { return 'Robot (AAA!CAFE)'; }
-	if (eregi('acoon\.de',	$agent))	 { return 'Robot (Acoon.de)'; }
-	if (eregi('accoona',		$agent)) { return 'Robot (Accoona)'; }
-	if (eregi('aggregator:MyRSS.jp',$agent)) { return 'Robot (MyRSS.jp)'; }
-	if (eregi('ArchitextSpider',	$agent)) { return 'Robot (Excite)'; }
-	if (eregi('Ask Jeeves',		$agent)) { return 'Robot (Ask Jeeves)'; }
-	if (eregi('Baiduspider',	$agent)) { return 'Robot (Baidu)'; }
-	if (eregi('BecomeJPBot',	$agent)) { return 'Robot (BecomeJP)'; }
-	if (eregi('bingbot',		$agent)) { return 'Robot (Bing)'; }
-	if (eregi('Cerberian',		$agent)) { return 'Robot (Cerberian)'; }
-	if (eregi('Comaneci_bot',	$agent)) { return 'Robot (i-know.jp)'; }
-	if (eregi('Cowbot',		$agent)) { return 'Robot (Naver)'; }
-	if (eregi('Convera',		$agent)) { return 'Robot (Convera)'; }
-	if (eregi('Twiceler',		$agent)) { return 'Robot (Cuill)'; }
-	if (eregi('discobot',		$agent)) { return 'Robot (discovery engine)'; }
-	if (eregi('Down Site Checker',	$agent)) { return 'Robot (Yahoo!)'; }
-	if (eregi('Drecombot',		$agent)) { return 'Robot (Drecom)'; }
-	if (eregi('emyuu_bot',		$agent)) { return 'Robot (Emyuu)'; }
-	if (eregi('Ezooms',		$agent)) { return 'Robot (ezoom)'; }
-	if (eregi('facebook',		$agent)) { return 'Robot (facebook)'; }
-	if (eregi('FAST-WebCrawler',	$agent)) { return 'Robot (fast.no)'; }
-	if (eregi('findlinks',		$agent)) { return 'Robot (findlinks)'; }
-	if (eregi('Gaisbot',		$agent)) { return 'Robot (Openfind)'; }
-	if (eregi('gazz',		$agent)) { return 'Robot (NTTR)'; }
-	if (eregi('Gigabot',		$agent)) { return 'Robot (Gigabot)'; }
-	if (eregi('Slurp\.so/Goo',	$agent)) { return 'Robot (goo)'; }
-//	if (eregi('Google',		$agent)) { return 'Robot (Google)'; }
-	if (eregi('Googlebot',		$agent)) { return 'Robot (Google)'; }
-	if (eregi('grub-client',	$agent)) { return 'Robot (grub-client)'; }
-	if (eregi('Hatena Antenna',	$agent)) { return 'Robot (Hatena)'; }
-	if (eregi('ia_archiver',	$agent)) { return 'Robot (Archiver)'; }
-	if (eregi('iaskspider',		$agent)) { return 'Robot (iAsk)'; }
-	if (eregi('\.ibm\.com',		$agent)) { return 'Robot (IBM)'; }
-	if (eregi('ichiro',		$agent)) { return 'Robot (NTTR)'; }
-	if (eregi('indexpert',		$agent)) { return 'Robot (Fresheye)'; }
-	if (eregi('Indy Library',	$agent)) { return 'Robot (Indy Library)'; }
-	if (eregi('Infoseek',		$agent)) { return 'Robot (Infoseek)'; }
-	if (eregi('Inktomi',		$agent)) { return 'Robot (Inktomi)'; }
-	if (eregi('livedoorCheckers',	$agent)) { return 'Robot (LivedoorCheckers)'; }
-	if (eregi('Looksmart',		$agent)) { return 'Robot (Looksmart)'; }
-	if (eregi('Lycos_Spider',	$agent)) { return 'Robot (Lycos)'; }
-	if (eregi('MarkAgent',		$agent)) { return 'Robot (MarkAgent)'; }
-	if (eregi('MJ12bot',		$agent)) { return 'Robot (majestic12)'; }
-	if (eregi('MLBot',		$agent)) { return 'Robot (Metadata Labs)'; }
-	if (eregi('msnbot',		$agent)) { return 'Robot (MSN)'; }
-	if (eregi('NaverRobot',		$agent)) { return 'Robot (Naver)'; }
-	if (eregi('nyanyu',		$agent)) { return 'Robot (nyanyu)'; }
-	if (eregi('ndl-japan',		$agent)) { return 'Robot (ndl-japan)'; }
-	if (eregi('NPBot',		$agent)) { return 'Robot (NameProtect)'; }
-	if (eregi('Nutch',		$agent)) { return 'Robot (Nutch)'; }
-	if (eregi('Nutraspace',		$agent)) { return 'Robot (nutraspace)'; }
-	if (eregi('OmniExplorer',	$agent)) { return 'Robot (OmniExplorer)'; }
-	if (eregi('onet\.pl',		$agent)) { return 'Robot (onet.pl)'; }
-	if (eregi('Pockey-GetHTML',	$agent)) { return 'Robot (GetHTML)'; }
-	if (eregi('psbot',		$agent)) { return 'Robot (Picsearch)'; }
-	if (eregi('SBIder',		$agent)) { return 'Robot (SiteSell)'; }
-	if (eregi('Scooter',		$agent)) { return 'Robot (AltaVista)'; }
-	if (eregi('search-hp',		$agent)) { return 'Robot (search-hp)'; }
-	if (eregi('Sidewinder',		$agent)) { return 'Robot (Infoseek)'; }
-	if (eregi('Sogou',		$agent)) { return 'Robot (Sogou)'; }
-	if (eregi('sohu-search',	$agent)) { return 'Robot (Sohu)'; }
-	if (eregi('StackRambler',	$agent)) { return 'Robot (Rambler)'; }
-	if (eregi('Speedy Spider',	$agent)) { return 'Robot (entireweb)'; }
-	if (eregi('Su-Jine',		$agent)) { return 'Robot (Su-Jine)'; }
-	if (eregi('TOCC',		$agent)) { return 'Robot (TOCC)'; }
-	if (eregi('Ultraseek',		$agent)) { return 'Robot (Ultraseek)'; }
-	if (eregi('walhello',		$agent)) { return 'Robot (Walhello)'; }
-	if (eregi('WebAlta',		$agent)) { return 'Robot (WebAlta)'; }
-	if (eregi('WebCrawler',		$agent)) { return 'Robot (WebCrawler)'; }
-	if (eregi('WISEbot',		$agent)) { return 'Robot (WISEbot)'; }
-	if (eregi('Y!J-DSC',		$agent)) { return 'Robot (Yahoo!)'; }
-	if (eregi('Y!J-BSC',		$agent)) { return 'Robot (Yahoo!)'; }
-	if (eregi('Yahoo! ',		$agent)) { return 'Robot (Yahoo!)'; }
-	if (eregi('Yeti',		$agent)) { return 'Robot (Naver)'; }
-	if (eregi('YodaoBot',		$agent)) { return 'Robot (youdao)'; }
-	if (eregi('ZyBorg',		$agent)) { return 'Robot (LYCOS)'; }
-
-	//	Other Robots
-	if (eregi('crawler',		$agent)) { return 'Robot (others)'; }
-	if (eregi('robot',		$agent)) { return 'Robot (others)'; }
-	if (eregi('spider'	,	$agent)) { return 'Robot (others)'; }
-	if (eregi('WebBot'	,	$agent)) { return 'Robot (others)'; }
-	//if (eregi('bot',		$agent)) { return 'Robot (others)'; }
-
-	//	Automations
-	if (eregi('Arachmo',		$agent)) { return 'Arachmo'; }
-	if (eregi('aggregator:MyRSS',	$agent)) { return 'MyRSS.jp'; }
-	if (eregi('bookmark\.ne\.jp',	$agent)) { return 'Bookmark'; }
-	if (eregi('Curl',		$agent)) { return 'Curl'; }
-	if (eregi('Hatena',		$agent)) { return 'Hatena'; }
-	if (eregi('^Java[\d_\/\.]+$',	$agent)) { return 'Program (Java)'; }
-	if (eregi('Java\(TM\).*Runtime',$agent)) { return 'Program (Java)'; }
-	if (eregi('libwww-perl',	$agent)) { return 'Program (Perl)'; }
-	if (eregi('Microsoft URL Control',$agent)) { return 'Program (Windows)'; }
-	if (eregi('PerManSurfer',	$agent)) { return 'PerManSurfer'; }
-	if (eregi('PHP',		$agent)) { return 'Program (PHP)'; }
-	if (eregi('POE-Component',	$agent)) { return 'Program (Perl)'; }
-	if (eregi('samidare',		$agent)) { return 'samidare'; }
-	if (eregi('Snoopy',		$agent)) { return 'Robot (Program (Snoopy))'; }
-	if (eregi('snoopy',		$agent)) { return 'Program (PHP)'; }
-	if (eregi('Webdup',		$agent)) { return 'Webdup'; }
-	if (eregi('WebAuto',		$agent)) { return 'WebAuto'; }
-	if (eregi('WebFetch',		$agent)) { return 'WebFetch'; }
-	if (eregi('WebWhacker',		$agent)) { return 'WebWhacker'; }
-	if (eregi('Wget',		$agent)) { return 'Wget'; }
-
-	//	Browsers (RSS Reader)
-	if (eregi('RSS_READER',			$agent, $a)) { return 'RSS_READER'; }
-	if (eregi('Headline-Reader',		$agent, $a)) { return 'Headline-Reader'; }
-
-	//	Other Rorbots   (including Web URL and/or Mail Address)
-	if (eregi('http:\/\/',		$agent)) { return 'Robot (others)'; }
-	if (eregi('[a-z]+@[a-z\.]+',	$agent)) { return 'Robot (others)'; }
-
-	//	Portable Devices
-	if (eregi('Android.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('iPad', $agent))
-	{  if (eregi('OS [0-9_]*',		$agent, $a))
-		{ return 'iPad '.str_replace('_', '.', $a[0]); }
-	}
-	if (eregi('iPhone OS [0-9_]*',		$agent, $a)) { return str_replace('_', '.', $a[0]); }
-	if (eregi('BlackBerry[0-9]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Airboard.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('(DDIPOCKET;)([A-Za-z]*)',	$agent, $a)) { return str_replace('/', ' ', $a[1]); }
-	if (eregi('DoCoMo.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('DreamPassport.[0-9\.]*',	$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('J-PHONE.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('jig.browser.[0-9\.]*',	$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('NetFront.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('UP\.Browser.[0-9\.]*',	$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Vodafone.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-
-	//	Browsers
-	if (eregi('Camino.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Cuam.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('CubeBrowser.[0-9\.]*',	$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Donut.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Firebird.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Firefox.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-//	if (eregi('FunWebProducts',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Galeon.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Hotbar.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('HotJava.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('iCab.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Konqueror.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Lunascape.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Lynx.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-//	if (eregi('MathPlayer ',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Maxthon',			$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('NetFront.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Ninja.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('NSPlayer.[0-9]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('OmniWeb.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Opera.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('PageNest.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('PageNest Pro.[0-9\.]*',	$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Phoenix.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Safari.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-//	if (eregi('SeaMonkey',			$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Shiira.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Sleipnir',			$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('Sylera.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-//	if (eregi('toolbar',			$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('TulipChain.[0-9\.]*',	$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('w3m.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('WWWC.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-
-
-	//	Browsers
-	if (eregi('Chrome.[0-9]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('compatible;[\s]+(MSIE.[0-9\.]*)',$agent, $a)) { return str_replace('/', ' ', $a[1]); }
-	if (eregi('^Mozilla', $agent) && eregi('(compatible; )([a-zA-Z \/]*[0-9\.]*)',$agent, $a))
-						             { return str_replace('/', ' ', $a[2]); }
-	if (eregi('^Mozilla.[0-9\.]*',		$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-	if (eregi('^([a-zA-Z\/]+.[0-9\.]*)$',	$agent, $a)) { return str_replace('/', ' ', $a[0]); }
-
-	return '(undefined)';
-}
-
-function lcx_rhshort($rh) {
-	if (preg_match('/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/', $rh)) { return ''; }
-	if (eregi('(\.([^\.]*)){1,3}$', $rh, $r)) { $rh = $r[0]; }
-	if (eregi('^([^\.]*)\.(.*)$', $rh, $r)) { return $r[2]; }
-	return '';
-}
-
-function lcx_refshort($ref) {
-	if (trim($ref == '')) { return ''; }
-	if (!preg_match('/^(http:\/\/|https:\/\/|ftp:\/\/)/', trim($ref))) { return 'Irregular Expression'; }
-	if (strpos('?', $ref) !== false) { list($ref, $query) = explode($ref, '?', 2); }
-	if (preg_match('/^(.*?\/\/)([^\/]*\/)([^\/]*\/)([^\/]*\/?)/', $ref, $r)) {
-		if	($r[3] = 'modules/')	{ return $r[1].$r[2]; }
-		elseif	($r[4] = 'modules/')	{ return $r[1].$r[2].$r[3]; }
-		else				{ return $r[0]; }
-	}
-	return '';
-}
-
-//	Data Conversion
-function lcx_LogEval($OPTION = '') {
-	global $xoopsDB;
-	if (strstr($OPTION, ';') || strstr($OPTION, "\n")) { exit(); }
-	$sql = "SELECT * FROM ".$xoopsDB->prefix("logcounterx_log").$OPTION;
-	$result = $xoopsDB->query($sql);
-	$RecCnt = 0;
-	while ($dat = $xoopsDB->fetchArray($result)) {
-		//	Short Remote Host
-		$RHShort =	addslashes(lcx_rhshort($dat['remote_host']));
-		//	Referer
-		if ($dat['referer'] != '') {
-			$RefShort =	addslashes(lcx_refshort($dat['referer']));
-		} else { $RefShort = ''; }
-		if (strpos($dat['referer'], '?') !== false) {
-			list($RefURL, $Query) = explode('?', $dat['referer'], 2);
-			$QWord =	addslashes(lcx_qu2qw($Query, $RefURL));
-			$RefURL =	addslashes($RefURL);
-		} else {
-			$RefURL =	$dat['referer'];
-			$Query =	'';
-			$QWord =	'';
-		}
-		$Browser =	addslashes(lcx_ua2br($dat['user_agent']));
-		$OS =		addslashes(lcx_ua2os($dat['user_agent']));
-		$RecID =	intval($dat['recid']);
-		$sql1 = "UPDATE " . $xoopsDB->prefix("logcounterx_log") . " SET " .
-		        " ref_query = '$Query', rh_short = '$RHShort', ref_short = '$RefShort'," .
-		        " agent = '$Browser', os = '$OS', qword = '$QWord' WHERE recid = $RecID";
-		$res = $xoopsDB->queryF($sql1);
-		$RecCnt++;
-	}
-	unset ($dat, $result);
-	return $RecCnt;
-}
-
-}
-?>

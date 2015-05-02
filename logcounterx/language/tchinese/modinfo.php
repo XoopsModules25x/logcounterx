@@ -1,22 +1,20 @@
 <?php
 
-define('_LCX_MI_NAME',	'ºô¯¸­p¼Æ¾¹');
-define('_LCX_MI_DESC',	'ªþ¦³¸Ô²Ó³øªí¥i¥H¨Ï¥Î©óXOOPSªº­p¼Æ¾¹');
+define('_LCX_MI_NAME', 'ç¶²ç«™è¨ˆæ•¸å™¨');
+define('_LCX_MI_DESC', 'é™„æœ‰è©³ç´°å ±è¡¨å?¯ä»¥ä½¿ç”¨æ–¼XOOPSçš„è¨ˆæ•¸å™¨');
 
-define("_LCX_MI_CONF_NAME", '³]©wLOG­p¼Æ¾¹');
-define("_LCX_MI_LOGCONF", 	'¸Ô²Ó³]©w');
-define("_LCX_MI_GENCONF", 	'°ò¥»³]©w');
-define("_LCX_MI_REPCONF", 	'³øªí³]©w');
-define("_LCX_MI_BLOCKSADMIN",'°Ï¶ôºÞ²z');
-define("_LCX_MI_IMGSLCT", 	"¹ÏÀÉ¿ï¾Ü");
-define("_LCX_MI_REBUILD", 	"­«·s«Ø¥ßLOG");
-define("_LCX_MI_BROSERLIST","Âsø°¾¹¤@Äý");
-define("_LCX_MI_QWORDSLIST","·j´MÃöÁä¦rªí");
-define("_LCX_MI_DBCHECK", 	"¸ê®Æ®w´ú©w");
+define("_LCX_MI_CONF_NAME", 'è¨­å®šLOGè¨ˆæ•¸å™¨');
+define("_LCX_MI_LOGCONF", 'è©³ç´°è¨­å®š');
+define("_LCX_MI_GENCONF", 'åŸºæœ¬è¨­å®š');
+define("_LCX_MI_REPCONF", 'å ±è¡¨è¨­å®š');
+define("_LCX_MI_BLOCKSADMIN", 'å?€å¡Šç®¡ç?†');
+define("_LCX_MI_IMGSLCT", "åœ–æª”é?¸æ“‡");
+define("_LCX_MI_REBUILD", "é‡?æ–°å»ºç«‹LOG");
+define("_LCX_MI_BROSERLIST", "ç€?ç? å™¨ä¸€è¦½");
+define("_LCX_MI_QWORDSLIST", "æ?œå°‹é—œé?µå­—è¡¨");
+define("_LCX_MI_DBCHECK", "è³‡æ–™åº«æ¸¬å®š");
 
-define('_LCX_MI_CTR_NAME',	'­p¼Æ¾¹');
-define('_LCX_MI_CTR_DESC',	'Åã¥Ü­p¼Æ¾¹');
-define('_LCX_MI_INC_NAME',	'¬ö¿ý°Ï¶ô');
-define('_LCX_MI_INC_DESC',	'¬ö¿ýªº°Ï¶ô¡]¤£Åã¥Ü¡^');
-
-?>
+define('_LCX_MI_CTR_NAME', 'è¨ˆæ•¸å™¨');
+define('_LCX_MI_CTR_DESC', 'é¡¯ç¤ºè¨ˆæ•¸å™¨');
+define('_LCX_MI_INC_NAME', 'ç´€éŒ„å?€å¡Š');
+define('_LCX_MI_INC_DESC', 'ç´€éŒ„çš„å?€å¡Šï¼ˆä¸?é¡¯ç¤ºï¼‰');

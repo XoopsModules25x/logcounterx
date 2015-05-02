@@ -1,25 +1,24 @@
 <?php
-define("_LCX_TOTAL",	"²Î­p­p¼Æ³øªí¡@¡]³X«È­p¼Æ¡^");
-define("_LCX_VALID",	"¦³®Ä¸ê®Æ¼Æ");
+define("_LCX_TOTAL", "çµ±è¨ˆè¨ˆæ•¸å ±è¡¨ã€€ï¼ˆè¨ªå®¢è¨ˆæ•¸ï¼‰");
+define("_LCX_VALID", "æœ‰æ•ˆè³‡æ–™æ•¸");
 
-define("_LCX_BY_R2",	"°Ñ·Óºô§}¡]¤@Äı¡^");
-define("_LCX_BY_OS",	"¨t²Î¤ÀªR");
-define("_LCX_BY_BR",	"ÂsÄı¾¹¤ÀªR");
-define("_LCX_BY_RC",	"ªñ¤é¤ÀªR");
-define("_LCX_BY_DR",	"¤é§O¡]¥H³sµ²¦¸¼Æ¦hªº¶¶§Ç¡^");
-define("_LCX_BY_WD",	"¬P´Á¤ÀªR");
-define("_LCX_BY_TM",	"®É¶¡±a¤ÀªR");
-define("_LCX_BY_HN",	"³sµ²¤ÀªR");
-define("_LCX_BY_RF",	"°Ñ·Óºô§}¡]³Ìªñ¡^");
-define("_LCX_BY_QW",	"·j´MÃöÁä¤ÀªR");
-define("_LCX_BY_UN",	"·|­û¤ÀªR");
-define("_LCX_BY_PI",	"³sµ²¤ÀªR");
+define("_LCX_BY_R2", "å?ƒç…§ç¶²å?€ï¼ˆä¸€è¦½ï¼‰");
+define("_LCX_BY_OS", "ç³»çµ±åˆ†æ?");
+define("_LCX_BY_BR", "ç€?è¦½å™¨åˆ†æ?");
+define("_LCX_BY_RC", "è¿‘æ—¥åˆ†æ?");
+define("_LCX_BY_DR", "æ—¥åˆ¥ï¼ˆä»¥é€£çµ?æ¬¡æ•¸å¤šçš„é †åº?ï¼‰");
+define("_LCX_BY_WD", "æ˜ŸæœŸåˆ†æ?");
+define("_LCX_BY_TM", "æ™‚é–“å¸¶åˆ†æ?");
+define("_LCX_BY_HN", "é€£çµ?åˆ†æ?");
+define("_LCX_BY_RF", "å?ƒç…§ç¶²å?€ï¼ˆæœ€è¿‘ï¼‰");
+define("_LCX_BY_QW", "æ?œå°‹é—œé?µåˆ†æ?");
+define("_LCX_BY_UN", "æœƒå“¡åˆ†æ?");
+define("_LCX_BY_PI", "é€£çµ?åˆ†æ?");
 
-define("_LCX_Sun",	"¬P´Á¤é");
-define("_LCX_Mon",	"¬P´Á¤@");
-define("_LCX_Tue",	"¬P´Á¤G");
-define("_LCX_Wed",	"¬P´Á¤T");
-define("_LCX_Thu",	"¬P´Á¥|");
-define("_LCX_Fri",	"¬P´Á¤­");
-define("_LCX_Sat",	"¬P´Á¤»");
-?>
+define("_LCX_Sun", "æ˜ŸæœŸæ—¥");
+define("_LCX_Mon", "æ˜ŸæœŸä¸€");
+define("_LCX_Tue", "æ˜ŸæœŸäºŒ");
+define("_LCX_Wed", "æ˜ŸæœŸä¸‰");
+define("_LCX_Thu", "æ˜ŸæœŸå››");
+define("_LCX_Fri", "æ˜ŸæœŸäº”");
+define("_LCX_Sat", "æ˜ŸæœŸå…­");

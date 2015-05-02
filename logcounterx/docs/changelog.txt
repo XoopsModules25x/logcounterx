@@ -1,0 +1,16 @@
+---------------------------------------
+2.75 Beta 1  2015-05-01
+---------------------------------------
+- added switch for XOOPS 2.5.7 Admin GUI (mamba)
+- replaced "eregi" with "preg_match (mamba)
+- replaced "dirname( __FILE__ )" with "__DIR__" (mamba)
+- replaced "intval" with "(int)" (mamba)
+- added some missing translations (mamba)
+- replaced "sizeof" with "count" (mamba)
+- replaced "fputs" with "fwrite" (mamba)
+ - some PSR-2 adjustments (mamba)
+
+---------------------------------------
+2.74                      2015-05-01
+---------------------------------------
+- forked from Taquino (http://xoops.taquino.net/) (mamba)
