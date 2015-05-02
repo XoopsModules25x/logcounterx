@@ -3,6 +3,10 @@ if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
 
+/**
+ * @param $module
+ * @return bool
+ */
 function xoops_module_uninstall_logcounterx(&$module)
 {
     global $xoopsDB;

@@ -10,6 +10,10 @@ if (!defined('LCX_LIBRARY_LOADED')) {
     include XOOPS_ROOT_PATH . "/modules/logcounterx/include/query_word.php";
 
     // Select OS according to USER_AGENT
+    /**
+     * @param string $agent
+     * @return string
+     */
     function lcx_ua2os($agent = '')
     {
         if ($agent == '') {
@@ -105,6 +109,10 @@ if (!defined('LCX_LIBRARY_LOADED')) {
     }
 
     // Select BROWSER according to USER_AGENT
+    /**
+     * @param string $agent
+     * @return mixed|string
+     */
     function lcx_ua2br($agent = '')
     {
         if ($agent == '') {
@@ -593,6 +601,10 @@ if (!defined('LCX_LIBRARY_LOADED')) {
         return '(undefined)';
     }
 
+    /**
+     * @param $rh
+     * @return string
+     */
     function lcx_rhshort($rh)
     {
         if (preg_match('/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/', $rh)) {
@@ -608,6 +620,10 @@ if (!defined('LCX_LIBRARY_LOADED')) {
         return '';
     }
 
+    /**
+     * @param $ref
+     * @return string
+     */
     function lcx_refshort($ref)
     {
         if (trim($ref == '')) {
@@ -633,6 +649,10 @@ if (!defined('LCX_LIBRARY_LOADED')) {
     }
 
     //	Data Conversion
+    /**
+     * @param string $OPTION
+     * @return int
+     */
     function lcx_LogEval($OPTION = '')
     {
         global $xoopsDB;
@@ -646,10 +666,9 @@ if (!defined('LCX_LIBRARY_LOADED')) {
             //	Short Remote Host
             $RHShort = addslashes(lcx_rhshort($dat['remote_host']));
             //	Referer
+            $RefShort = '';
             if ($dat['referer'] != '') {
                 $RefShort = addslashes(lcx_refshort($dat['referer']));
-            } else {
-                $RefShort = '';
             }
             if (strpos($dat['referer'], '?') !== false) {
                 list($RefURL, $Query) = explode('?', $dat['referer'], 2);
@@ -667,7 +686,7 @@ if (!defined('LCX_LIBRARY_LOADED')) {
                        " ref_query = '$Query', rh_short = '$RHShort', ref_short = '$RefShort'," .
                        " agent = '$Browser', os = '$OS', qword = '$QWord' WHERE recid = $RecID";
             $res     = $xoopsDB->queryF($sql1);
-            $RecCnt++;
+            ++$RecCnt;
         }
         unset($dat, $result);
 

@@ -38,7 +38,7 @@ while ($t = $xoopsDB->fetchArray($res)) {
                      '<td nowrap="nowrap" align="right">' . number_format($t['Data_free']) . '</td>' .
                      '<td nowrap="nowrap">' . $t['Update_time'] . '</td>' .
                      '</tr>';
-            $i++;
+            ++$i;
         }
     }
 }

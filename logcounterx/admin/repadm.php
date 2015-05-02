@@ -53,7 +53,7 @@ print '
 foreach ($fld as $f) {
     $n = $nam[$f];
     print '<tr valign="top" align="left"><td class="head">' . $n . '</td><td class="even">';
-    for ($i = 0; $i <= 3; $i++) {
+    for ($i = 0; $i <= 3; ++$i) {
         if ($NewConf[$f] == $i) {
             print '<input type="radio" name="' . $f . '" value="' . $i . '" style="background-color:#00FF00;" checked="checked" />' . $opt[$i];
         } else {

@@ -78,7 +78,7 @@ if (!$sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_BLOCK, $xoopsUser
 
 // get blocks owned by the module (Imported from xoopsblock.php then modified)
 //$block_arr =& XoopsBlock::getByModule( $target_mid ) ;
-$db        =& Database::getInstance();
+$db        =& XoopsDatabaseFactory::getDatabaseConnection();
 $sql       = "SELECT * FROM " . $db->prefix("newblocks") . " WHERE mid='$target_mid' ORDER BY visible DESC,side,weight";
 $result    = $db->query($sql);
 $block_arr = array();
@@ -160,7 +160,7 @@ function list_blocks()
         }
 
         // target modules
-        $db            =& Database::getInstance();
+        $db            =& XoopsDatabaseFactory::getDatabaseConnection();
         $result        = $db->query("SELECT module_id FROM " . $db->prefix('block_module_link') . " WHERE block_id='$bid'");
         $selected_mids = array();
         while (list($selected_mid) = $db->fetchRow($result)) {
@@ -183,10 +183,9 @@ function list_blocks()
         }
 
         // delete link if it is cloned block
+        $delete_link = '';
         if ($block_arr[$i]->getVar("block_type") == 'D' || $block_arr[$i]->getVar("block_type") == 'C') {
             $delete_link = "<br /><a href='admin.php?fct=blocksadmin&amp;op=delete&amp;bid=$bid'>" . _DELETE . "</a>";
-        } else {
-            $delete_link = '';
         }
 
         // clone link if it is marked as cloneable block
@@ -203,10 +202,9 @@ function list_blocks()
                 }
             }
         }
+        $clone_link = '';
         if ($can_clone) {
             $clone_link = "<br /><a href='admin.php?fct=blocksadmin&amp;op=clone&amp;bid=$bid'>" . _CLONE . "</a>";
-        } else {
-            $clone_link = '';
         }
 
         // displaying part
@@ -284,6 +282,9 @@ function list_blocks()
 	</form>\n";
 }
 
+/**
+ * @return array
+ */
 function get_block_configs()
 {
     $error_reporting_level = error_reporting(0);

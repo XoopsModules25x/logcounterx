@@ -3,6 +3,10 @@ if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
 
+/**
+ * @param $module
+ * @return bool
+ */
 function xoops_module_install_logcounterx(&$module)
 {
     global $xoopsDB;
@@ -12,7 +16,7 @@ function xoops_module_install_logcounterx(&$module)
     $xoopsDB->queryF("INSERT INTO " . $xoopsDB->prefix('logcounterx_count') . " (ymd, cnt) VALUES ('1111-11-11', 0)");
 
     //	Initialize Hour Counter
-    for ($i = 0; $i < 24; $i++) {
+    for ($i = 0; $i < 24; ++$i) {
         $hour = sprintf("%02d", $i);
         $xoopsDB->queryF("INSERT INTO " . $xoopsDB->prefix('logcounterx_hours') . " (hour, cnt) VALUES ('$hour', 0)");
     }

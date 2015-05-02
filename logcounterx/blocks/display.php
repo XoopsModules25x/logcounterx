@@ -3,6 +3,10 @@ if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
 
+/**
+ * @param $options
+ * @return array
+ */
 function b_logcounterx_show_counter($options)
 {
     global $xoopsDB, $xoopsConfig;
@@ -95,7 +99,7 @@ function b_logcounterx_show_counter($options)
     $imageattr         = '';
     if (function_exists('getimagesize')) {
         list($width, $height, $type, $attr) = getimagesize(XOOPS_ROOT_PATH . '/modules/logcounterx/images/' . $imagedir . '0.gif');
-        for ($i = 1; $i < 10; $i++) {
+        for ($i = 1; $i < 10; ++$i) {
             list($width1, $height1, $type1, $attr1) = getimagesize(XOOPS_ROOT_PATH . '/modules/logcounterx/images/' . $imagedir . $i . '.gif');
             if ($width != $width1) {
                 $width = 0;
@@ -116,11 +120,16 @@ function b_logcounterx_show_counter($options)
     return $block;
 }
 
+/**
+ * @param $cnt
+ * @return array
+ */
 function b_logcounterx_sub($cnt)
 {
     global $imagesize;
     $ret = array();
-    for ($i = 0; $i < strlen($cnt); $i++) {
+    $myLength = strlen($cnt);
+    for ($i = 0; $i < $myLength; ++$i) {
         //	$ret['digit'][$i] = substr($cnt, $i, 1);
         $s = substr($cnt, $i, 1);
         if ($s != ',') {

@@ -3,6 +3,11 @@ if (!defined('XOOPS_ROOT_PATH')) {
     exit();
 }
 
+/**
+ * @param $module
+ * @param $prev_version
+ * @return bool
+ */
 function xoops_module_update_logcounterx(&$module, $prev_version)
 {
     global $xoopsDB;
@@ -54,7 +59,7 @@ function xoops_module_update_logcounterx(&$module, $prev_version)
         while (list($H, $C) = $xoopsDB->fetchRow($res1)) {
             $HData[(int)($H)] = (int)($C);
         }
-        for ($i = 0; $i < 24; $i++) {
+        for ($i = 0; $i < 24; ++$i) {
             $hour = sprintf("%02d", $i);
             if (isset($HData[$i])) {
                 $j = $HData[$i];

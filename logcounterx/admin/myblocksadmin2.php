@@ -75,7 +75,7 @@ if (!$sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_BLOCK, $xoopsUser
 }
 
 // get blocks owned by the module (Imported from xoopsblock.php then modified)
-$db        =& Database::getInstance();
+$db        =& XoopsDatabaseFactory::getDatabaseConnection();
 $sql       = "SELECT bid,name,show_func,func_file,template FROM " . $db->prefix("newblocks") . " WHERE mid='$target_mid'";
 $result    = $db->query($sql);
 $block_arr = array();
@@ -130,7 +130,7 @@ function list_blockinstances()
         foreach (array_keys($module_main) as $mid) {
             $module_list[$module_main[$mid]->getVar('name')][$mid . "-0"] = _AM_ALLMODULEPAGES;
             $pages                                                        = $module_main[$mid]->getInfo("pages");
-            if ($pages == false) {
+            if ($pages === false) {
                 $pages = $module_main[$mid]->getInfo("sub");
             }
             if (is_array($pages) && $pages != array()) {
@@ -163,23 +163,23 @@ function list_blockinstances()
         } else {
             switch ($instances[$i]->getVar("side")) {
             default :
-            case XOOPS_SIDEBLOCK_LEFT :
+            case XOOPS_SIDEBLOCK_LEFT:
                 $ssel0 = " checked='checked'";
                 $scol0 = "#00FF00";
                 break;
-            case XOOPS_SIDEBLOCK_RIGHT :
+            case XOOPS_SIDEBLOCK_RIGHT:
                 $ssel1 = " checked='checked'";
                 $scol1 = "#00FF00";
                 break;
-            case XOOPS_CENTERBLOCK_LEFT :
+            case XOOPS_CENTERBLOCK_LEFT:
                 $ssel2 = " checked='checked'";
                 $scol2 = "#00FF00";
                 break;
-            case XOOPS_CENTERBLOCK_RIGHT :
+            case XOOPS_CENTERBLOCK_RIGHT:
                 $ssel4 = " checked='checked'";
                 $scol4 = "#00FF00";
                 break;
-            case XOOPS_CENTERBLOCK_CENTER :
+            case XOOPS_CENTERBLOCK_CENTER:
                 $ssel3 = " checked='checked'";
                 $scol3 = "#00FF00";
                 break;

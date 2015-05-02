@@ -56,6 +56,13 @@ $RecCnt = lcx_LogEval(" WHERE ($RecID <= recid) AND (recid < " . ($RecID + $Step
 DisplayProcessing($PageNum, $RecID + $StepRecNum, $TotalRecNum, $MaxRecID, $StepRecNum);
 exit();
 
+/**
+ * @param $PageNum
+ * @param $NextRecID
+ * @param $TotalRecNum
+ * @param $MaxRecID
+ * @param $StepRecNum
+ */
 function DisplayProcessing($PageNum, $NextRecID, $TotalRecNum, $MaxRecID, $StepRecNum)
 {
     header('Content-Type:text/html; charset=EUC-JP');
@@ -67,7 +74,7 @@ function DisplayProcessing($PageNum, $NextRecID, $TotalRecNum, $MaxRecID, $StepR
 <meta http-equiv="content-type" content="text/html;charset=EUC-JP">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <style type="text/css">
-body {background-color : #fcfcfc; font-size: 12px; font-family: Trebuchet MS,Verdana, Arial, Helvetica, sans-serif; margin: 0px;}
+body {background-color : #fcfcfc; font-size: 12px; font-family: Trebuchet MS,Verdana, Arial, Helvetica, sans-serif; margin: 0;}
 .redirect {width: 70%; margin: 110px; text-align: center; padding: 15px; border: #e0e0e0 1px solid; color: #666666; background-color: #f6f6f6;}
 .redirect a:link {color: #666666; text-decoration: none; font-weight: bold;}
 .redirect a:visited {color: #666666; text-decoration: none; font-weight: bold;}

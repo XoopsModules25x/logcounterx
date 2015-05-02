@@ -79,6 +79,10 @@ class MyXoopsGroupPermForm extends XoopsForm
 
     /**
      * Constructor
+     * @param $title
+     * @param $modid
+     * @param $permname
+     * @param $permdesc
      */
     public function MyXoopsGroupPermForm($title, $modid, $permname, $permdesc)
     {
@@ -110,6 +114,9 @@ class MyXoopsGroupPermForm extends XoopsForm
      * Add appendix
      *
      * @access public
+     * @param $permName
+     * @param $itemId
+     * @param $itemName
      */
     public function addAppendix($permName, $itemId, $itemName)
     {
@@ -244,6 +251,10 @@ class MyXoopsGroupFormCheckBox extends XoopsFormElement
 
     /**
      * Constructor
+     * @param      $caption
+     * @param      $name
+     * @param      $groupId
+     * @param null $values
      */
     public function MyXoopsGroupFormCheckBox($caption, $name, $groupId, $values = null)
     {
@@ -287,6 +298,7 @@ class MyXoopsGroupFormCheckBox extends XoopsFormElement
      * Sets appendix of checkboxes
      *
      * @access public
+     * @param $appendix
      */
     public function setAppendix($appendix)
     {
@@ -316,7 +328,7 @@ class MyXoopsGroupFormCheckBox extends XoopsFormElement
                 $itemid  = $append['itemid'];
                 $itemid  = $append['itemid'];
                 $ret .= "<td class=\"odd\"><input type=\"checkbox\" name=\"{$name}[groups][$this->_groupId][$itemid]\" id=\"{$name}[groups][$this->_groupId][$itemid]\" value=\"1\" $checked />{$append['itemname']}<input type=\"hidden\" name=\"{$name}[parents][$itemid]\" value=\"\" /><input type=\"hidden\" name=\"{$name}[itemname][$itemid]\" value=\"{$append['itemname']}\" /><br /></td>";
-                $cols++;
+                ++$cols;
             }
             $ret .= '</tr></table>';
         }
@@ -333,7 +345,7 @@ class MyXoopsGroupFormCheckBox extends XoopsFormElement
                 $prefix = '';
                 $this->_renderOptionTree($tree, $this->_optionTree[$topitem], $prefix);
                 $ret .= $tree . '</td>';
-                $cols++;
+                ++$cols;
             }
         }
         $ret .= '</tr></table>';

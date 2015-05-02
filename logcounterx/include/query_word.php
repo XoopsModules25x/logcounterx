@@ -4,6 +4,11 @@ if (!defined('XOOPS_ROOT_PATH')) {
 }
 
 // Convert HTTP_QUERY to query word according to USER_AGENT
+/**
+ * @param string $query
+ * @param string $refhost
+ * @return mixed|string
+ */
 function lcx_qu2qw($query = '', $refhost = '')
 {
     if ($query == '') {
@@ -21,7 +26,7 @@ function lcx_qu2qw($query = '', $refhost = '')
         if (strpos($myq, '=')) {
             list($key, $val) = explode('=', $myq, 2);
             $q[$key] = urldecode($val);
-            $q_count++;
+            ++$q_count;
         }
     }
     if ($q_count == 0) {

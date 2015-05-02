@@ -20,7 +20,7 @@ list($USE_IMGORCHR) = $xoopsDB->fetchRow($xoopsDB->query($sql));
 if (isset($_POST['imgdir']) && preg_match('/^[a-zA-Z0-9_\-]+$/', $_POST['imgdir'])) {
     $newdir    = $_POST['imgdir'];
     $imgdirchk = true;
-    for ($i = 0; $i <= 9; $i++) {
+    for ($i = 0; $i <= 9; ++$i) {
         if (!file_exists($imgdir . $newdir . "/$i.gif")) {
             $imgdirchk = false;
             break;
@@ -66,7 +66,7 @@ if ($USE_IMGORCHR == 1) {
     print    '<tr valign="top" align="left">' .
              '<td class="head">' . _LCX_ADM_STYLE . '</td>' .
              '<form action="imgslct.php" method="post" style="margin-bottom:0;">' .
-             '<td class="odd"><span style="' . $USE_CHR_STYLE . '">0123456789</span><br />' .
+             '<td class="odd"><span style="' . $USE_CHR_STYLE . ';">0123456789</span><br />' .
              '&lt;SPAN style=&quot;<input type="text" name="stylecode" value="' . $USE_CHR_STYLE . '" size="60" />' .
              '&quot;&gt;<br />' .
              '<input type="submit" value="' . _SUBMIT . '" />' .
@@ -80,14 +80,13 @@ if ($USE_IMGORCHR == 1) {
     if (isset($CONF['IMG_DIR']) && ($CONF['IMG_DIR'] != '')) {
         $newdir = $CONF['IMG_DIR'] . '/';
     }
-    for ($i = 0; $i <= 9; $i++) {
+    for ($i = 0; $i <= 9; ++$i) {
         print '<img src="' . $imgurl . $newdir . $i . '.gif" border="0" />';
     }
     print    '<br clear="all" />' . _LCX_ADM_CHGIMG_NOTE . '</td></tr>';
+    $mystyle = '';
     if ($CONF['IMG_DIR'] = '') {
         $mystyle = ' style="background-color:#00FF00"';
-    } else {
-        $mystyle = '';
     }
     print    '<form action="imgslct.php" method="post" style="margin-bottom:0;">' .
              '<tr valign="top" align="left">' .
@@ -112,15 +111,14 @@ if ($USE_IMGORCHR == 1) {
         while ($nam = readdir($dh)) {
             if ((is_dir($imgdir . $nam)) && ($nam != '.') && ($nam != '..')) {
                 if (file_exists($imgdir . $nam . '/0.gif')) {
+                    $mystyle = '';
                     if ($nam == $CONF['IMG_DIR']) {
                         $mystyle = ' style="background-color:#00FF00"';
-                    } else {
-                        $mystyle = '';
                     }
                     $imageattr = '';
                     if (function_exists('getimagesize')) {
                         list($width, $height, $type, $attr) = getimagesize($imgdir . $nam . '/0.gif');
-                        for ($i = 1; $i < 10; $i++) {
+                        for ($i = 1; $i < 10; ++$i) {
                             list($width1, $height1, $type1, $attr1) = getimagesize($imgdir . $nam . '/' . $i . '.gif');
                             if ($width != $width1) {
                                 $width = 0;

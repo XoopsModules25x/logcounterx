@@ -63,45 +63,41 @@ if (isset($_POST['previewblock'])) {
         die('Invalid bid.');
     }
 
+    $bside = $bweight = $bvisible = $bcachetime = 0;
+
     if (!empty($_POST['bside'])) {
         $bside = (int)($_POST['bside']);
-    } else {
-        $bside = 0;
     }
+
     if (!empty($_POST['bweight'])) {
         $bweight = (int)($_POST['bweight']);
-    } else {
-        $bweight = 0;
     }
+
     if (!empty($_POST['bvisible'])) {
         $bvisible = (int)($_POST['bvisible']);
-    } else {
-        $bvisible = 0;
     }
+
+    $bmodule = array();
     if (!empty($_POST['bmodule'])) {
         $bmodule = $_POST['bmodule'];
-    } else {
-        $bmodule = array();
     }
+
+    $btitle = $bcontent = $bctype = '';
+
     if (!empty($_POST['btitle'])) {
         $btitle = $_POST['btitle'];
-    } else {
-        $btitle = "";
     }
+
     if (!empty($_POST['bcontent'])) {
         $bcontent = $_POST['bcontent'];
-    } else {
-        $bcontent = "";
     }
+
     if (!empty($_POST['bctype'])) {
         $bctype = $_POST['bctype'];
-    } else {
-        $bctype = "";
     }
+
     if (!empty($_POST['bcachetime'])) {
         $bcachetime = (int)($_POST['bcachetime']);
-    } else {
-        $bcachetime = 0;
     }
 
     xoops_cp_header();
@@ -145,7 +141,7 @@ if (isset($_POST['previewblock'])) {
     $block['is_custom'] = true;
     $block['cachetime'] = (int)($bcachetime);
     echo '<a href="myblocksadmin.php">' . _AM_BADMIN . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . $block['form_title'] . '<br /><br />';
-    include dirname(__FILE__) . '/../admin/myblockform.php'; //GIJ
+    include __DIR__ . '/../admin/myblockform.php'; //GIJ
     //echo '<a href="admin.php?fct=blocksadmin">'. _AM_BADMIN .'</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;'.$block['form_title'].'<br /><br />';
     //include XOOPS_ROOT_PATH.'/modules/system/admin/blocksadmin/blockform.php';
     $xoopsGTicket->addTicketXoopsFormElement($form, __LINE__, 1800, 'myblocksadmin'); //GIJ
@@ -207,10 +203,10 @@ if ($op == 'order') {
     //  if ( !empty($_POST['oldside']) ) { $oldside = $_POST['oldside']; }
     //  if ( !empty($_POST['oldweight']) ) { $oldweight = $_POST['oldweight']; }
     //  if ( !empty($_POST['oldvisible']) ) { $oldvisible = $_POST['oldvisible']; }
+
+    $bid = array();
     if (!empty($_POST['bid'])) {
         $bid = $_POST['bid'];
-    } else {
-        $bid = array();
     }
     // GIJ start
     foreach (array_keys($bid) as $i) {
@@ -254,10 +250,9 @@ if ($op == 'order2') {
         if (!empty($_POST['visible'])) {
             $visible = $_POST['visible'];
         }
+        $id = array();
         if (!empty($_POST['id'])) {
             $id = $_POST['id'];
-        } else {
-            $id = array();
         }
 
         foreach (array_keys($id) as $i) {
@@ -378,7 +373,7 @@ if ($op == 'edit') {
     // edit_block($bid); GIJ imported from blocksadmin.php
     $myblock = new XoopsBlock($bid);
 
-    $db      =& Database::getInstance();
+    $db      =& XoopsDatabaseFactory::getDatabaseConnection();
     $sql     = 'SELECT module_id FROM ' . $db->prefix('block_module_link') . ' WHERE block_id=' . (int)($bid);
     $result  = $db->query($sql);
     $modules = array();
@@ -389,7 +384,7 @@ if ($op == 'edit') {
     $block     = array('form_title' => _AM_EDITBLOCK, 'name' => $myblock->getVar('name'), 'side' => $myblock->getVar('side'), 'weight' => $myblock->getVar('weight'), 'visible' => $myblock->getVar('visible'), 'title' => $myblock->getVar('title', 'E'), 'content' => $myblock->getVar('content', 'n'), 'modules' => $modules, 'is_custom' => $is_custom, 'ctype' => $myblock->getVar('c_type'), 'cachetime' => $myblock->getVar('bcachetime'), 'op' => 'update', 'bid' => $myblock->getVar('bid'), 'edit_form' => $myblock->getOptions(), 'template' => $myblock->getVar('template'), 'options' => $myblock->getVar('options'), 'submit_button' => _SUBMIT);
 
     echo '<a href="myblocksadmin.php">' . _AM_BADMIN . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . _AM_EDITBLOCK . '<br /><br />';
-    include dirname(__FILE__) . '/../admin/myblockform.php'; //GIJ
+    include __DIR__ . '/../admin/myblockform.php'; //GIJ
     $xoopsGTicket->addTicketXoopsFormElement($form, __LINE__, 1800, 'myblocksadmin'); //GIJ
     $form->display();
     // end of edit_block() GIJ
@@ -401,7 +396,7 @@ if ($op == 'clone') {
     xoops_cp_header();
     $myblock = new XoopsBlock($bid);
 
-    $db      =& Database::getInstance();
+    $db      =& XoopsDatabaseFactory::getDatabaseConnection();
     $sql     = 'SELECT module_id FROM ' . $db->prefix('block_module_link') . ' WHERE block_id=' . (int)($bid);
     $result  = $db->query($sql);
     $modules = array();
@@ -411,7 +406,7 @@ if ($op == 'clone') {
     $is_custom = ($myblock->getVar('block_type') == 'C' || $myblock->getVar('block_type') == 'E') ? true : false;
     $block     = array('form_title' => _AM_CLONEBLOCK, 'name' => $myblock->getVar('name'), 'side' => $myblock->getVar('side'), 'weight' => $myblock->getVar('weight'), 'visible' => $myblock->getVar('visible'), 'content' => $myblock->getVar('content', 'N'), 'title' => $myblock->getVar('title', 'E'), 'modules' => $modules, 'is_custom' => $is_custom, 'ctype' => $myblock->getVar('c_type'), 'cachetime' => $myblock->getVar('bcachetime'), 'op' => 'clone_ok', 'bid' => $myblock->getVar('bid'), 'edit_form' => $myblock->getOptions(), 'template' => $myblock->getVar('template'), 'options' => $myblock->getVar('options'), 'submit_button' => _CLONE);
     echo '<a href="myblocksadmin.php">' . _AM_BADMIN . '</a>&nbsp;<span style="font-weight:bold;">&raquo;&raquo;</span>&nbsp;' . _AM_CLONEBLOCK . '<br /><br />';
-    include dirname(__FILE__) . '/../admin/myblockform.php';
+    include __DIR__ . '/../admin/myblockform.php';
     $xoopsGTicket->addTicketXoopsFormElement($form, __LINE__, 1800, 'myblocksadmin'); //GIJ
     $form->display();
     xoops_cp_footer();
@@ -482,7 +477,7 @@ if ($op == 'clone_ok') {
                 $tplman->insert($tplclone);
             }
         } */
-    $db      =& Database::getInstance();
+    $db      =& XoopsDatabaseFactory::getDatabaseConnection();
     $bmodule = (isset($_POST['bmodule']) && is_array($_POST['bmodule'])) ? $_POST['bmodule'] : array(-1); // GIJ +
     foreach ($bmodule as $bmid) {
         $sql = 'INSERT INTO ' . $db->prefix('block_module_link') . ' (block_id, module_id) VALUES (' . $newid . ', ' . $bmid . ')';
@@ -492,7 +487,7 @@ if ($op == 'clone_ok') {
     /*	global $xoopsUser;
         $groups =& $xoopsUser->getGroups();
         $count = count($groups);
-        for ($i = 0; $i < $count; $i++) {
+        for ($i = 0; $i < $count; ++$i) {
             $sql = "INSERT INTO ".$db->prefix('group_permission')." (gperm_groupid, gperm_itemid, gperm_modid, gperm_name) VALUES (".$groups[$i].", ".$newid.", 1, 'block_read')";
             $db->query($sql);
         }
@@ -509,6 +504,32 @@ if ($op == 'clone_ok') {
 }
 
 // import from modules/system/admin/blocksadmin/blocksadmin.php
+/**
+ * @param       $bid
+ * @param       $bside
+ * @param       $bweight
+ * @param       $bvisible
+ * @param       $btitle
+ * @param       $bcontent
+ * @param       $bctype
+ * @param       $bcachetime
+ * @param       $bmodule
+ * @param array $options
+ * @return string
+ */
+/**
+ * @param       $bid
+ * @param       $bside
+ * @param       $bweight
+ * @param       $bvisible
+ * @param       $btitle
+ * @param       $bcontent
+ * @param       $bctype
+ * @param       $bcachetime
+ * @param       $bmodule
+ * @param array $options
+ * @return string
+ */
 function myblocksadmin_update_block($bid, $bside, $bweight, $bvisible, $btitle, $bcontent, $bctype, $bcachetime, $bmodule, $options = array())
 {
     global $xoopsConfig;
@@ -555,8 +576,8 @@ function myblocksadmin_update_block($bid, $bside, $bweight, $bvisible, $btitle, 
         $myblock->setVar('name', $name);
     }
     $msg = _AM_DBUPDATED;
-    if ($myblock->store() != false) {
-        $db  =& Database::getInstance();
+    if ($myblock->store() !== false) {
+        $db  =& XoopsDatabaseFactory::getDatabaseConnection();
         $sql = sprintf("DELETE FROM %s WHERE block_id = %u", $db->prefix('block_module_link'), $bid);
         $db->query($sql);
         foreach ($bmodule as $bmid) {
@@ -588,6 +609,20 @@ function myblocksadmin_update_block($bid, $bside, $bweight, $bvisible, $btitle, 
 }
 
 // update block instance for 2.2
+/**
+ * @param       $id
+ * @param       $bside
+ * @param       $bweight
+ * @param       $bvisible
+ * @param       $btitle
+ * @param       $bcontent
+ * @param       $bctype
+ * @param       $bcachetime
+ * @param       $bmodule
+ * @param array $options
+ * @param null  $bid
+ * @return string
+ */
 function myblocksadmin_update_blockinstance($id, $bside, $bweight, $bvisible, $btitle, $bcontent, $bctype, $bcachetime, $bmodule, $options = array(), $bid = null)
 {
     global $xoopsDB;

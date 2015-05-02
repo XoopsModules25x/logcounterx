@@ -184,10 +184,10 @@ if ($usr >= $CONF['REP_WD']) {
     $sql        = "SELECT (DAYOFWEEK(ymd) - 1) AS W, SUM(cnt) as C, 1 AS DUMMY FROM " . Lcx_Cnt_DB . " WHERE ymd like '20%' GROUP BY W ORDER BY W";
     $MyTempData = set_log_data($sql, 7);
     $MyData     = array();
-    for ($i = 0; $i < 7; $i++) {
+    for ($i = 0; $i < 7; ++$i) {
         $MyData[$i] = array('Width' => 0, 'Count' => 0, 'Percent' => 0);
         for ($j = 0; $j < 7; $j++) {
-            if (isset($MyTempData[$j]['Name']) && ($MyTempData[$j]['Name'] == strval($i))) {
+            if (isset($MyTempData[$j]['Name']) && ($MyTempData[$j]['Name'] == (string) ($i))) {
                 $MyData[$i] = $MyTempData[$j];
             }
         }
@@ -205,7 +205,7 @@ if ($usr >= $CONF['REP_WD']) {
 //	Time
 if ($usr >= $CONF['REP_TM']) {
     $MyData = array();
-    for ($i = 0; $i < 24; $i++) {
+    for ($i = 0; $i < 24; ++$i) {
         $MyData[$i] = array('Name' => sprintf('%02d', $i), 'Count' => 0, 'FormattedCount' => 0, 'Robot' => 0, 'NoRobot' => 0);
     }
     $SumCount    = 0;
@@ -234,7 +234,7 @@ if ($usr >= $CONF['REP_TM']) {
     if ($MaxDayCount == 0) {
         $MaxDayCount = 1;
     }
-    for ($i = 0; $i < 24; $i++) {
+    for ($i = 0; $i < 24; ++$i) {
         $MyData[$i]['Percent']      = round($MyData[$i]['Count'] * 100 / $SumCount);
         $MyData[$i]['Width']        = ceil($CONF['MAX_WIDTH'] * $MyData[$i]['Count'] / $MaxDayCount);
         $MyData[$i]['RobotWidth']   = ceil($CONF['MAX_WIDTH'] * $MyData[$i]['Count'] / $MaxDayCount);
@@ -247,8 +247,8 @@ if ($usr >= $CONF['REP_TM']) {
     $sql =	"SELECT hour AS H, cnt AS C, 1 AS DUMMY FROM ".Lcx_Hrs_DB." ORDER BY hour";
     $MyTempData = set_log_data($sql, 24, $CONF['MAX_WIDTH']);
     $MyData = array();
-    for ($i = 0; $i < 24; $i++) {
-        if (isset($MyTempData[strval($i)])) { $MyData[$i] = $MyTempData[strval($i)]; }
+    for ($i = 0; $i < 24; ++$i) {
+        if (isset($MyTempData[(string) ($i)])) { $MyData[$i] = $MyTempData[(string) ($i)]; }
         else { $MyData[$i] = array('Width' => 0, 'Count' => 0, 'Percent' => 0); }
         $MyData[$i]['Name'] = sprintf('%02d', $i);
     }
@@ -280,7 +280,7 @@ if ($usr >= $CONF['REP_RF']) {
     $MyTempData = set_log_data($sql, $CONF['DATA_LIMIT'], $CONF['MAX_WIDTH'] / 5);
     $MyData     = array();
     foreach ($MyTempData as $Data) {
-        if (($Data['RowName'] == 'unknown') || ereg('\+\+\+\+\+\+\+\+\+\+', $Data['RowName'])) {
+        if (($Data['RowName'] == 'unknown') || preg_match('/\+\+\+\+\+\+\+\+\+\+/', $Data['RowName'])) {
             continue;
         }
         $MyName = $Data['RowName'];
@@ -288,16 +288,14 @@ if ($usr >= $CONF['REP_RF']) {
             if (mb_detect_encoding($MyName, 'auto') != '') {
                 $MyName = mb_convert_encoding($MyName, _CHARSET, 'auto');
             }
+            $MyShortName = $MyName;
             if (mb_strwidth($MyName) > Lcx_ShortLength) {
                 $MyShortName = mb_strimwidth($MyName, 0, Lcx_ShortLength - 3, ' ..');
-            } else {
-                $MyShortName = $MyName;
             }
         } else {
+            $MyShortName = $MyName;
             if (strlen($MyName) > Lcx_ShortLength) {
                 $MyShortName = substr($MyName, 0, Lcx_ShortLength - 3) . ' ..';
-            } else {
-                $MyShortName = $MyName;
             }
         }
         $MyData[] = array('Name' => htmlspecialchars($MyName), 'Link' => $Data['Link'], 'Count' => $Data['Count'], 'FormattedCount' => $Data['FormattedCount'], 'ShortName' => htmlspecialchars($MyShortName), 'Width' => $CONF['MAX_WIDTH']);
@@ -313,7 +311,7 @@ if ($usr >= $CONF['REP_RF']) {
     $MyTempData = set_log_data($sql, $CONF['DATA_LIMIT'], $CONF['MAX_WIDTH'] / 5);
     $MyData2    = array();
     foreach ($MyTempData as $Data) {
-        if (($Data['RowName'] == 'unknown') || ereg('\+\+\+\+\+\+\+\+\+\+', $Data['RowName'])) {
+        if (($Data['RowName'] == 'unknown') || preg_match('/\+\+\+\+\+\+\+\+\+\+/', $Data['RowName'])) {
             continue;
         }
         $MyName = $Data['RowName'];
@@ -321,16 +319,14 @@ if ($usr >= $CONF['REP_RF']) {
             if (mb_detect_encoding($MyName, 'auto') != '') {
                 $MyName = mb_convert_encoding($MyName, _CHARSET, 'auto');
             }
+            $MyShortName = $MyName;
             if (mb_strwidth($MyName) > Lcx_ShortLength) {
                 $MyShortName = mb_strimwidth($MyName, 0, Lcx_ShortLength - 3, ' ..');
-            } else {
-                $MyShortName = $MyName;
             }
         } else {
+            $MyShortName = $MyName;
             if (strlen($MyName) > Lcx_ShortLength) {
                 $MyShortName = substr($MyName, 0, Lcx_ShortLength - 3) . ' ..';
-            } else {
-                $MyShortName = $MyName;
             }
         }
         $MyData2[] = array('Name' => htmlspecialchars($MyName), 'Link' => $Data['Link'], 'Count' => $Data['Count'], 'FormattedCount' => $Data['FormattedCount'], 'ShortName' => htmlspecialchars($MyShortName), 'Width' => $CONF['MAX_WIDTH']);
@@ -349,6 +345,12 @@ if ($usr >= $CONF['REP_PI']) {
 
 include_once("../../footer.php");
 
+/**
+ * @param     $sql
+ * @param int $limit
+ * @param int $imgw
+ * @return array
+ */
 function set_log_data($sql, $limit = 24, $imgw = 0)
 {
     global $xoopsDB, $CONF;
@@ -410,7 +412,7 @@ function set_log_data($sql, $limit = 24, $imgw = 0)
         $MyData[$RecCount++] = array('Name' => $MyDisplayName, 'RowName' => $MyRowName, 'ShortName' => $MyShortName, 'Link' => $MyLink, 'Count' => $MyCount, 'FormattedCount' => number_format($MyCount));
     }
     if ($MaxCount > 0) {
-        for ($i = 0; $i < $RecCount; $i++) {
+        for ($i = 0; $i < $RecCount; ++$i) {
             $MyData[$i]['Width']   = ceil($imgw * $MyData[$i]['Count'] / $MaxCount);
             $MyData[$i]['Percent'] = round($MyData[$i]['Count'] * 100 / $SumCount);
         }

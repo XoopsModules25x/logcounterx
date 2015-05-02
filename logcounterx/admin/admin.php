@@ -83,7 +83,7 @@ if ($admintest != 0) {
             unset($modversion);
             if ($category > 0) {
                 $groups = $xoopsUser->getGroups();
-                if (in_array(XOOPS_GROUP_ADMIN, $groups) || false != $sysperm_handler->checkRight('system_admin', $category, $groups, $xoopsModule->getVar('mid'))) {
+                if (in_array(XOOPS_GROUP_ADMIN, $groups) || false !== $sysperm_handler->checkRight('system_admin', $category, $groups, $xoopsModule->getVar('mid'))) {
                     //					if (file_exists(XOOPS_ROOT_PATH."/modules/system/admin/".$fct."/main.php")) {
                     //						include_once XOOPS_ROOT_PATH."/modules/system/admin/".$fct."/main.php"; GIJ
                     if (file_exists("../include/{$fct}.inc.php")) {
@@ -111,7 +111,7 @@ if ($admintest != 0) {
     }
 }
 
-if (false != $error) {
+if (false !== $error) {
     xoops_cp_header();
     echo "<h4>System Configuration</h4>";
     echo '<table class="outer" cellpadding="4" cellspacing="1">';
@@ -133,11 +133,11 @@ if (false != $error) {
             include $admin_dir . '/' . $file . '/xoops_version.php';
             if ($modversion['hasAdmin']) {
                 $category = isset($modversion['category']) ? (int)($modversion['category']) : 0;
-                if (false != $all_ok || in_array($modversion['category'], $ok_syscats)) {
+                if (false !== $all_ok || in_array($modversion['category'], $ok_syscats)) {
                     echo "<td class='$class' align='center' valign='bottom' width='19%'>";
                     echo "<a href='" . XOOPS_URL . "/modules/system/admin.php?fct=" . $file . "'><b>" . trim($modversion['name']) . "</b></a>\n";
                     echo "</td>";
-                    $counter++;
+                    ++$counter;
                     $class = ($class == 'even') ? 'odd' : 'even';
                 }
                 if ($counter > 4) {
@@ -152,7 +152,7 @@ if (false != $error) {
     while ($counter < 5) {
         echo '<td class="' . $class . '">&nbsp;</td>';
         $class = ($class == 'even') ? 'odd' : 'even';
-        $counter++;
+        ++$counter;
     }
     echo '</tr></table>';
     xoops_cp_footer();
