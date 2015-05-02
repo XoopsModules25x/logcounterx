@@ -200,7 +200,7 @@ if (!defined('LCX_LIBRARY_LOADED')) {
         if (preg_match('/Gigabot/i', $agent)) {
             return 'Robot (Gigabot)';
         }
-        if (preg_match('/Slurp\.so/Goo/i', $agent)) {
+        if (preg_match('#Slurp\.so/Goo#i', $agent)) {
             return 'Robot (goo)';
         }
         //	if (preg_match('/Google/i',		$agent)) { return 'Robot (Google)'; }
