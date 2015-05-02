@@ -1,12 +1,12 @@
 <?php
-if (!defined('XOOPS_ROOT_PATH')) { exit(); }
+if (!defined('XOOPS_ROOT_PATH')) {
+    exit();
+}
 
-define("_LCX_BLK_NAME",			"¥¢¥¯¥»¥¹¥«¥¦¥ó¥¿");
-define("_LCX_BLK_TOTAL",		"Áí·× :");
-define("_LCX_BLK_DAY",			"º£Æü :");
-define("_LCX_BLK_YESTERDAY",	"ºòÆü :");
-define("_LCX_BLK_WEEK",			"º£½µ :");
-define("_LCX_BLK_MONTH",		"º£·î :");
-define("_LCX_BLK_AVE",			"Ê¿¶Ñ :");
-
-?>
+define("_LCX_BLK_NAME", "Â¥Â¢Â¥Â¯Â¥Â»Â¥Â¹Â¥Â«Â¥Â¦Â¥Ã³Â¥Â¿");
+define("_LCX_BLK_TOTAL", "Ã?Ã­Â·Ã— :");
+define("_LCX_BLK_DAY", "ÂºÂ£Ã†Ã¼ :");
+define("_LCX_BLK_YESTERDAY", "ÂºÃ²Ã†Ã¼ :");
+define("_LCX_BLK_WEEK", "ÂºÂ£Â½Âµ :");
+define("_LCX_BLK_MONTH", "ÂºÂ£Â·Ã® :");
+define("_LCX_BLK_AVE", "ÃŠÂ¿Â¶Ã‘ :");

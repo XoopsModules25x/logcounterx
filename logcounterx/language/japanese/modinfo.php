@@ -1,23 +1,23 @@
 <?php
-if (!defined('XOOPS_ROOT_PATH')) { exit(); }
+if (!defined('XOOPS_ROOT_PATH')) {
+    exit();
+}
 
-define('_LCX_MI_NAME',	'¥í¥°¥«¥¦¥ó¥¿');
-define('_LCX_MI_DESC',	'¥í¥°¥ì¥Ý¡¼¥ÈÉÕXOOPSÍÑ¥«¥¦¥ó¥¿');
+define('_LCX_MI_NAME', 'Â¥Ã­Â¥Â°Â¥Â«Â¥Â¦Â¥Ã³Â¥Â¿');
+define('_LCX_MI_DESC', 'Â¥Ã­Â¥Â°Â¥Ã¬Â¥Ã?Â¡Â¼Â¥ÃˆÃ‰Ã•XOOPSÃ?Ã‘Â¥Â«Â¥Â¦Â¥Ã³Â¥Â¿');
 
-define("_LCX_MI_CONF_NAME",	'¥í¥°¥«¥¦¥ó¥¿ÀßÄê');
-define("_LCX_MI_GENCONF", 	'°ìÈÌÀßÄê');
-define("_LCX_MI_LOGCONF", 	'¾ÜºÙÀßÄê');
-define("_LCX_MI_REPCONF", 	'¥ì¥Ý¡¼¥ÈÀßÄê');
-define("_LCX_MI_REBUILD", 	"¥í¥°¤ÎºÆ¹½ÃÛ");
-define("_LCX_MI_IMGSLCT", 	"²èÁüÁªÂò");
-define("_LCX_MI_DBCHECK", 	"£Ä£Â¥Á¥§¥Ã¥¯");
-define("_LCX_MI_BROSERLIST",	"¥Ö¥é¥¦¥¶¥ê¥¹¥È");
-define("_LCX_MI_QWORDSLIST",	"¸¡º÷¸ì¥ê¥¹¥È");
-define("_LCX_MI_BLOCKSADMIN", 	"¥Ö¥í¥Ã¥¯´ÉÍý");
+define("_LCX_MI_CONF_NAME", 'Â¥Ã­Â¥Â°Â¥Â«Â¥Â¦Â¥Ã³Â¥Â¿Ã€ÃŸÃ„Ãª');
+define("_LCX_MI_GENCONF", 'Â°Ã¬ÃˆÃŒÃ€ÃŸÃ„Ãª');
+define("_LCX_MI_LOGCONF", 'Â¾ÃœÂºÃ™Ã€ÃŸÃ„Ãª');
+define("_LCX_MI_REPCONF", 'Â¥Ã¬Â¥Ã?Â¡Â¼Â¥ÃˆÃ€ÃŸÃ„Ãª');
+define("_LCX_MI_REBUILD", "Â¥Ã­Â¥Â°Â¤ÃŽÂºÃ†Â¹Â½ÃƒÃ›");
+define("_LCX_MI_IMGSLCT", "Â²Ã¨Ã?Ã¼Ã?ÂªÃ‚Ã²");
+define("_LCX_MI_DBCHECK", "Â£Ã„Â£Ã‚Â¥Ã?Â¥Â§Â¥ÃƒÂ¥Â¯");
+define("_LCX_MI_BROSERLIST", "Â¥Ã–Â¥Ã©Â¥Â¦Â¥Â¶Â¥ÃªÂ¥Â¹Â¥Ãˆ");
+define("_LCX_MI_QWORDSLIST", "Â¸Â¡ÂºÃ·Â¸Ã¬Â¥ÃªÂ¥Â¹Â¥Ãˆ");
+define("_LCX_MI_BLOCKSADMIN", "Â¥Ã–Â¥Ã­Â¥ÃƒÂ¥Â¯Â´Ã‰Ã?Ã½");
 
-define('_LCX_MI_CTR_NAME',	'¥¢¥¯¥»¥¹¥«¥¦¥ó¥¿');
-define('_LCX_MI_CTR_DESC',	'¥¢¥¯¥»¥¹¥«¥¦¥ó¥¿É½¼¨');
-define('_LCX_MI_INC_NAME',	'¥«¥¦¥ó¥È¥Ö¥í¥Ã¥¯');
-define('_LCX_MI_INC_DESC',	'¥«¥¦¥ó¥È¥¢¥Ã¥×¡ÊÌµÉ½¼¨¡Ë');
-
-?>
+define('_LCX_MI_CTR_NAME', 'Â¥Â¢Â¥Â¯Â¥Â»Â¥Â¹Â¥Â«Â¥Â¦Â¥Ã³Â¥Â¿');
+define('_LCX_MI_CTR_DESC', 'Â¥Â¢Â¥Â¯Â¥Â»Â¥Â¹Â¥Â«Â¥Â¦Â¥Ã³Â¥Â¿Ã‰Â½Â¼Â¨');
+define('_LCX_MI_INC_NAME', 'Â¥Â«Â¥Â¦Â¥Ã³Â¥ÃˆÂ¥Ã–Â¥Ã­Â¥ÃƒÂ¥Â¯');
+define('_LCX_MI_INC_DESC', 'Â¥Â«Â¥Â¦Â¥Ã³Â¥ÃˆÂ¥Â¢Â¥ÃƒÂ¥Ã—Â¡ÃŠÃŒÂµÃ‰Â½Â¼Â¨Â¡Ã‹');
